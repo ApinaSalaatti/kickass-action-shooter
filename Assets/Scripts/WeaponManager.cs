@@ -26,6 +26,7 @@ public class WeaponManager : MonoBehaviour {
 			fireTimer = 0f;
 			GameObject b = Instantiate(bulletPrefab, transform.position, Quaternion.identity) as GameObject;
 			b.GetComponent<EntityMover>().Movement = AimTowards;
+			b.layer = gameObject.layer;
 		}
 	}
 }
