@@ -6,11 +6,13 @@ public class PlayerInputManager : MonoBehaviour {
 
 	private EntityMover playerMover;
 	private WeaponManager playerWeapons;
+	private AbilityManager playerAbilities;
 
 	// Use this for initialization
 	void Start () {
 		playerMover = player.GetComponent<EntityMover>();
 		playerWeapons = player.GetComponent<WeaponManager>();
+		playerAbilities = player.GetComponent<AbilityManager>();
 	}
 	
 	// Update is called once per frame
@@ -33,6 +35,11 @@ public class PlayerInputManager : MonoBehaviour {
 		}
 		if(Input.GetButtonUp("Fire1")) {
 			playerWeapons.Firing = false;
+		}
+
+		// Abilities
+		if(Input.GetButtonDown("Fire2")) {
+			playerAbilities.ActivateAbility();
 		}
 	}
 }

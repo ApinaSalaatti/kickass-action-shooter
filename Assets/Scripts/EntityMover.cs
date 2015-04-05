@@ -9,7 +9,7 @@ public class EntityMover : MonoBehaviour {
 		get; set;
 	}
 
-	private Rigidbody2D rigidbody;
+	private new Rigidbody2D rigidbody; // NOTE TO SELF: The 'new' keyword means this variable hides an inherited member variable
 
 	// Use this for initialization
 	void Start () {
