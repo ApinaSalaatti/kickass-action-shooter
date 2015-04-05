@@ -2,13 +2,22 @@
 using System.Collections;
 using System.Collections.Generic;
 
+public class StoppedBulletData {
+	public GameObject Bullet { get; set; }
+	public float OriginalSpeed { get; set; }
+	public StoppedBulletData(GameObject bullet, float origSpeed) {
+		Bullet = bullet;
+		OriginalSpeed = origSpeed;
+	}
+}
+
 public class BulletStopAbility : Ability {
 	public float effectDistance = 5f;
 
-	private List<GameObject> affectedBullets;
+	private List<StoppedBulletData> affectedBullets;
 
 	void Awake() {
-		affectedBullets = new List<GameObject>();
+		affectedBullets = new List<StoppedBulletData>();
 	}
 
 	private float activeTimeLeft = 0f;
@@ -28,50 +37,88 @@ public class BulletStopAbility : Ability {
 
 	void Update () {
 		if(Active) {
-			GetAffectedBullets();
-			TakeEffect();
+			//GetAffectedBullets();
+			UpdateEffect();
 
 			activeTimeLeft -= Time.deltaTime;
 			if(activeTimeLeft <= 0f) {
-				EndEffect();
+				BounceBullets();
 			}
 		}
 	}
 
 	private void BounceBullets() {
-		foreach(GameObject bullet in affectedBullets) {
+		foreach(StoppedBulletData sbd in affectedBullets) {
+			GameObject bullet = sbd.Bullet;
 			EntityMover em = bullet.GetComponent<EntityMover>();
 			em.Movement *= -1f;
-			em.speed = 15f; // TODO: Just a number I randomly made up, figure out something cool
+			em.speed = 15f; // TODO: Just a number I randomly made up, figure out something cool maybe?
 			bullet.layer = 10; // The bullets become player's bullets, woah!
 		}
 		EndEffect();
 	}
 
 	private void EndEffect() {
+		affectedBullets.Clear();
 		StartCooldown();
 		activeTimeLeft = 0f;
 		Active = false;
 		GetComponent<ParticleSystem>().Stop();
 	}
 
-	private void TakeEffect() {
-		foreach(GameObject bullet in affectedBullets) {
-			float dst = Vector3.Distance(bullet.transform.position, Owner.transform.position);
-			float maxSpeed = Mathf.Max(0, dst - 1f);
-			EntityMover em = bullet.GetComponent<EntityMover>();
-			if(em.speed > maxSpeed)
-				em.speed = maxSpeed;
+	private List<StoppedBulletData> toRemove = new List<StoppedBulletData>();
+	private void UpdateEffect() {
+		foreach(StoppedBulletData sbd in affectedBullets) {
+			GameObject bullet = sbd.Bullet;
+			if(bullet == null) {
+				// If the bullet has been destroyed (say the player just ran to it while it was stopped or whatever) we should remove it
+				// Mark to be removed so as not to modify the collection while traversing it
+				toRemove.Add(sbd);
+			}
+			else {
+				float dst = Vector3.Distance(bullet.transform.position, Owner.transform.position);
+				float maxSpeed = Mathf.Max(0, dst - 1f);
+				EntityMover em = bullet.GetComponent<EntityMover>();
+				if(em.speed > maxSpeed)
+					em.speed = maxSpeed;
+			}
+		}
+
+		// Now remove all data that's been marked to be removed
+		foreach(StoppedBulletData sbd in toRemove) {
+			affectedBullets.Remove(sbd);
+		}
+		toRemove.Clear();
+	}
+
+	void OnTriggerEnter2D(Collider2D col) {
+		if(Active) {
+			Bullet b = col.gameObject.GetComponent<Bullet>();
+			if(b != null) {
+				affectedBullets.Add(new StoppedBulletData(b.gameObject, b.gameObject.GetComponent<EntityMover>().speed));
+			}
 		}
 	}
 
-	private void GetAffectedBullets() {
-		affectedBullets.Clear();
-		foreach(GameObject bullet in GameApplication.WorldState.Bullets) {
-			float dst = Vector3.Distance(bullet.transform.position, Owner.transform.position);
-			if(dst < effectDistance) {
-				affectedBullets.Add(bullet);
+	void OnTriggerExit2D(Collider2D col) {
+		if(Active) {
+			Bullet b = col.gameObject.GetComponent<Bullet>();
+			if(b != null) {
+				StoppedBulletData sbd = FindBulletData(b.gameObject);
+				if(sbd != null) {
+					affectedBullets.Remove(sbd);
+					sbd.Bullet.GetComponent<EntityMover>().speed = sbd.OriginalSpeed;
+				}
 			}
 		}
+	}
+
+	private StoppedBulletData FindBulletData(GameObject b) {
+		foreach(StoppedBulletData sbd in affectedBullets) {
+			if(sbd.Bullet == b)
+				return sbd;
+		}
+
+		return null;
 	}
 }
