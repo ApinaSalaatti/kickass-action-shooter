@@ -2,45 +2,37 @@
 using System.Collections;
 
 public class WeaponManager : MonoBehaviour {
-	public float fireInterval = 0.2f;
-	public float inaccuracyModifier = 0.1f;
+	[SerializeField]
+	private Weapon currentWeapon;
 
-	public GameObject bulletPrefab;
+	public void SetWeapon(Weapon w) {
+		if(w != null) {
+			currentWeapon = w;
+			currentWeapon.gameObject.layer = gameObject.layer; // Set the "owner" of this weapon
+			currentWeapon.transform.position = transform.position;
+			currentWeapon.transform.SetParent(transform);
+		}
+	}
 
 	// These will always be set from outside, i.e. by AI or player input
 	public bool Firing {
-		get; set;
+		get {
+			return currentWeapon.Firing;
+		}
+		set {
+			currentWeapon.Firing = value;
+		}
 	}
 	public Vector2 AimTowards {
-		get; set;
-	}
-
-	private float fireTimer;
-
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		fireTimer += Time.deltaTime;
-		if(Firing && fireTimer >= fireInterval) {
-			fireTimer = 0f;
-			GameObject b = Instantiate(bulletPrefab, transform.position, Quaternion.identity) as GameObject;
-
-			// Set a correct layer (Enemy Bullet or Player Bullet) to prevent bullet from stupidly colliding with each other
-			if(gameObject.layer == 8)
-				b.layer = 10;
-			else if(gameObject.layer == 9)
-				b.layer = 11;
-
-			// Add some inaccuracy
-			Vector2 aim = AimTowards + new Vector2(Random.Range(-inaccuracyModifier, inaccuracyModifier), Random.Range(-inaccuracyModifier, inaccuracyModifier));
-			aim = aim.normalized;
-			b.GetComponent<EntityMover>().Movement = aim;
-
-			GameApplication.EventManager.QueueEvent(GameEvent.BULLET_CREATED, b);
+		get {
+			return currentWeapon.AimTowards;
 		}
+		set {
+			currentWeapon.AimTowards = value;
+		}
+	}
+
+	void Update() {
+
 	}
 }

@@ -15,18 +15,20 @@ public class IncredibleAI : MonoBehaviour {
 	void Update () {
 		GameObject player = GameApplication.WorldState.Player;
 
-		float dist = Vector3.Distance(player.transform.position, transform.position);
-		Vector3 toPlayer = player.transform.position - transform.position;
-		toPlayer = toPlayer.normalized;
+		if(player != null) {
+			float dist = Vector3.Distance(player.transform.position, transform.position);
+			Vector3 toPlayer = player.transform.position - transform.position;
+			toPlayer = toPlayer.normalized;
 
-		if(dist < 8f) {
-			mover.Movement = Vector2.zero;
-			weapons.AimTowards = toPlayer;
-			weapons.Firing = true;
-		}
-		else {
-			weapons.Firing = false;
-			mover.Movement = toPlayer;
+			if(dist < 8f) {
+				mover.Movement = Vector2.zero;
+				weapons.AimTowards = toPlayer;
+				weapons.Firing = true;
+			}
+			else {
+				weapons.Firing = false;
+				mover.Movement = toPlayer;
+			}
 		}
 	}
 }

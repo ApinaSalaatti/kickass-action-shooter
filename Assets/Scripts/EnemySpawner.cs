@@ -2,8 +2,9 @@
 using System.Collections;
 
 public class EnemySpawner : MonoBehaviour {
-	public GameObject player;
 	public GameObject enemyPrefab;
+
+	public GameObject[] weaponPrefabs;
 
 	private float spawnTimer = 0f;
 
@@ -21,8 +22,15 @@ public class EnemySpawner : MonoBehaviour {
 			Vector2 direction = Random.insideUnitCircle;
 			direction = direction.normalized;
 			direction = direction * 10f;
-			Vector3 pos = new Vector3(player.transform.position.x+direction.x, player.transform.position.y+direction.y, 0);
-			Instantiate(enemyPrefab, pos, Quaternion.identity);
+			Vector3 pos = new Vector3(transform.position.x+direction.x, transform.position.y+direction.y, 0);
+			GameObject e = Instantiate(enemyPrefab, pos, Quaternion.identity) as GameObject;
+			SetRandomWeapon(e);
 		}
+	}
+
+	private void SetRandomWeapon(GameObject enemy) {
+		int r = Random.Range(0, weaponPrefabs.Length);
+		GameObject w = Instantiate(weaponPrefabs[r]) as GameObject;
+		enemy.GetComponent<WeaponManager>().SetWeapon(w.GetComponent<Weapon>());
 	}
 }

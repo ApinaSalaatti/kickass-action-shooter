@@ -21,6 +21,7 @@ public class WorldState : MonoBehaviour, IGameEventListener {
 	void Start() {
 		GameApplication.EventManager.RegisterListener(GameEvent.BULLET_CREATED, this);
 		GameApplication.EventManager.RegisterListener(GameEvent.BULLET_REMOVED, this);
+		GameApplication.EventManager.RegisterListener(GameEvent.PLAYER_DEAD, this);
 	}
 	
 	// Update is called once per frame
@@ -34,6 +35,9 @@ public class WorldState : MonoBehaviour, IGameEventListener {
 		}
 		else if(e.GameEventType == GameEvent.BULLET_REMOVED) {
 			bullets.Remove(e.GameEventData as GameObject);
+		}
+		else if(e.GameEventType == GameEvent.PLAYER_DEAD) {
+			player = null;
 		}
 	}
 }
