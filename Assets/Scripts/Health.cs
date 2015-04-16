@@ -16,10 +16,12 @@ public class Health : MonoBehaviour {
 		
 	}
 
-	void TakeDamage(float dmg) {
+	void TakeDamage(DamageInfo di) {
+		float dmg = di.DamageAmount;
+
 		currentHealth -= dmg;
 
-		SendMessage("OnDamage", SendMessageOptions.DontRequireReceiver);
+		SendMessage("OnDamage", di, SendMessageOptions.DontRequireReceiver);
 		if(currentHealth <= 0) {
 			SendMessage("OnDeath", SendMessageOptions.DontRequireReceiver);
 			Destroy(gameObject);

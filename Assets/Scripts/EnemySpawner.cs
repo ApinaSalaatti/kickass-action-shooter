@@ -18,14 +18,17 @@ public class EnemySpawner : MonoBehaviour {
 		spawnTimer += Time.deltaTime;
 		if(spawnTimer >= 2f) {
 			spawnTimer = 0f;
-
-			Vector2 direction = Random.insideUnitCircle;
-			direction = direction.normalized;
-			direction = direction * 10f;
-			Vector3 pos = new Vector3(transform.position.x+direction.x, transform.position.y+direction.y, 0);
-			GameObject e = Instantiate(enemyPrefab, pos, Quaternion.identity) as GameObject;
-			SetRandomWeapon(e);
+			SpawnEnemy();
 		}
+	}
+
+	private void SpawnEnemy() {
+		Vector2 direction = Random.insideUnitCircle;
+		direction = direction.normalized;
+		direction = direction * 10f;
+		Vector3 pos = new Vector3(transform.position.x+direction.x, transform.position.y+direction.y, 0);
+		GameObject e = Instantiate(enemyPrefab, pos, Quaternion.identity) as GameObject;
+		SetRandomWeapon(e);
 	}
 
 	private void SetRandomWeapon(GameObject enemy) {

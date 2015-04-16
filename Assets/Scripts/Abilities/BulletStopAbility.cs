@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
+// A helper class to remember data about the affected bullets (mainly their original speed)
 public class StoppedBulletData {
 	public GameObject Bullet { get; set; }
 	public float OriginalSpeed { get; set; }
@@ -37,7 +38,6 @@ public class BulletStopAbility : Ability {
 
 	void Update () {
 		if(Active) {
-			//GetAffectedBullets();
 			UpdateEffect();
 
 			activeTimeLeft -= Time.deltaTime;
@@ -47,6 +47,7 @@ public class BulletStopAbility : Ability {
 		}
 	}
 
+	// Makes all the affected bullets change to the player's bullets and fly into the direction they came from
 	private void BounceBullets() {
 		foreach(StoppedBulletData sbd in affectedBullets) {
 			GameObject bullet = sbd.Bullet;
@@ -102,6 +103,7 @@ public class BulletStopAbility : Ability {
 
 	void OnTriggerExit2D(Collider2D col) {
 		if(Active) {
+			// When a bullet leaves the force field, its speed is returned to the original speed
 			Bullet b = col.gameObject.GetComponent<Bullet>();
 			if(b != null) {
 				StoppedBulletData sbd = FindBulletData(b.gameObject);
@@ -113,6 +115,7 @@ public class BulletStopAbility : Ability {
 		}
 	}
 
+	// A helper method to find the BulletData of a given bullet GameObject
 	private StoppedBulletData FindBulletData(GameObject b) {
 		foreach(StoppedBulletData sbd in affectedBullets) {
 			if(sbd.Bullet == b)
