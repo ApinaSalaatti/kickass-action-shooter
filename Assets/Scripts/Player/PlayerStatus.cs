@@ -2,6 +2,13 @@
 using System.Collections;
 
 public class PlayerStatus : MonoBehaviour {
+	private int score = 0;
+	public int Score {
+		get { return score; }
+	}
+	public void AddScore(int s) {
+		score += s;
+	}
 
 	// Use this for initialization
 	void Start () {

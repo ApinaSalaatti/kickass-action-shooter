@@ -5,6 +5,9 @@ public class Health : MonoBehaviour {
 	public float maxHealth = 10f;
 
 	private float currentHealth;
+	public float CurrentHealth {
+		get { return currentHealth; }
+	}
 
 	// Use this for initialization
 	void Start () {
