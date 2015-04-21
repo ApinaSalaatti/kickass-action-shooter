@@ -13,6 +13,10 @@ public class PlayerStatus : MonoBehaviour {
 	
 	}
 
+	void OnDamage() {
+		CameraEffects.StartShake(0.3f, 0.1f);
+	}
+
 	void OnDeath() {
 		GameApplication.EventManager.QueueEvent(GameEvent.PLAYER_DEAD, gameObject);
 	}

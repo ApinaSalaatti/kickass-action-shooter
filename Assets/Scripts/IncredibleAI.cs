@@ -20,7 +20,7 @@ public class IncredibleAI : MonoBehaviour {
 			Vector3 toPlayer = player.transform.position - transform.position;
 			toPlayer = toPlayer.normalized;
 
-			if(dist < 8f) {
+			if(dist < 4f) {
 				mover.Movement = Vector2.zero;
 				weapons.AimTowards = toPlayer;
 				weapons.Firing = true;

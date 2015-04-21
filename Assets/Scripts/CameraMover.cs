@@ -20,6 +20,7 @@ public class CameraMover : MonoBehaviour {
 			targetPos.y = player.transform.position.y;
 
 			transform.position = targetPos;
+			//transform.position = Vector3.Lerp(transform.position, targetPos, Time.deltaTime * 3f);
 		}
 	}
 }

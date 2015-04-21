@@ -56,6 +56,8 @@ public class BulletStopAbility : Ability {
 			em.speed = 15f; // TODO: Just a number I randomly made up, figure out something cool maybe?
 			bullet.layer = 10; // The bullets become player's bullets, woah!
 		}
+
+		CameraEffects.StartShake(0.3f, 0.1f);
 		EndEffect();
 	}
 
