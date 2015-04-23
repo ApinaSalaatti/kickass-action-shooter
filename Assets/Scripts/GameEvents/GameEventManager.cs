@@ -53,6 +53,13 @@ public class GameEventManager : MonoBehaviour {
 			l.Add(listener);
 		}
 	}
+	// Removes a listener from the listeners of the given event type (if they both are actually present)
+	public void RemoveListener(int eventType, IGameEventListener listener) {
+		List<IGameEventListener> l;
+		if(listeners.TryGetValue(eventType, out l)) {
+			l.Remove(listener);
+		}
+	}
 	
 	// Adds an event to the event queue that will be processed next update
 	public void QueueEvent(GameEvent e) {

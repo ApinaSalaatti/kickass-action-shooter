@@ -31,4 +31,8 @@ public class IncredibleAI : MonoBehaviour {
 			}
 		}
 	}
+
+	void OnDeath() {
+		GameApplication.EventManager.QueueEvent(GameEvent.ENEMY_DEAD, gameObject);
+	}
 }
