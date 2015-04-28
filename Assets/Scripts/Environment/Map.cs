@@ -3,9 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class Map : MonoBehaviour {
-	private Room currentRoom;
+	[SerializeField]
+	private Room startingRoom; // The room where the game starts. Set this via the inspector.
+	public Room StartingRoom { get { return startingRoom; } }
+	
+	private Room currentRoom; // Keeps track of the whereabouts of the player
+	public Room CurrentRoom { get { return currentRoom; } }
 
 	private List<Room> allRooms;
+	public List<Room> Rooms {
+		get { return allRooms; }
+	}
 
 	// Use this for initialization
 	void Awake() {

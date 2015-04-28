@@ -18,7 +18,10 @@ public class Room : MonoBehaviour {
 	private EnemySpawner spawner;
 
 	private bool started = false; // Has the action in this room started?
+	public bool Started { get { return started; } }
+
 	private bool cleared = false; // Has the action in this room ended?
+	public bool Cleared { get { return cleared; } }
 
 	void Awake() {
 		spawner = GetComponent<EnemySpawner>();
