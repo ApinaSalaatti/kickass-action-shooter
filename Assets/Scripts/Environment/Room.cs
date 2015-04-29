@@ -60,8 +60,11 @@ public class Room : MonoBehaviour {
 	private IEnumerator EndRoom() {
 		cleared = true;
 		Debug.Log(gameObject.name + " ending...");
-		// TODO: some cool congratulations and effects here
-		yield return new WaitForSeconds(3f);
+
+		// Send an event to inform other objects so they can display a message to the player or something. This Component really doesn't care...
+		GameApplication.EventManager.QueueEvent(GameEvent.ROOM_CLEARED, this);
+
+		yield return new WaitForSeconds(5f);
 		OpenDoors();
 	}
 
@@ -69,7 +72,8 @@ public class Room : MonoBehaviour {
 	private IEnumerator StartRoom() {
 		Debug.Log(gameObject.name + " starting...");
 		CloseDoors();
-		yield return new WaitForSeconds(3f); // Wait a few secs so the player can adjust themselves to the new room (TODO: maybe show a countdown?)
+		GameApplication.EventManager.QueueEvent(GameEvent.ROOM_STARTING, this);
+		yield return new WaitForSeconds(5f); // Wait a few secs so the player can adjust themselves to the new room (TODO: maybe show a countdown?)
 		StartEnemySpawner();
 	}
 

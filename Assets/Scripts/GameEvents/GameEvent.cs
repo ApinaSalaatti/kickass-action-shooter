@@ -7,6 +7,8 @@ public class GameEvent {
 	public static int BULLET_REMOVED = 2;
 	public static int ENEMY_DEAD = 3;
 	public static int PLAYER_DEAD = 4;
+	public static int ROOM_CLEARED = 5;
+	public static int ROOM_STARTING = 6;
 
 	private int gameEventType;
 	public int GameEventType {
