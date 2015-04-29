@@ -26,8 +26,7 @@ public class PlayerInputManager : MonoBehaviour, IGameEventListener {
 
 		// Moving
 		Vector2 movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-		movement = movement.normalized;
-		playerMover.Movement = movement;
+		playerMover.Velocity = movement.normalized * playerMover.MaxSpeed; // Player always runs at FULL SPEED
 
 		// Aiming
 		Vector3 mousePos = Input.mousePosition;

@@ -25,29 +25,26 @@ public class MapGUICreator : MonoBehaviour {
 		while(toInitiate.Count > 0) {
 			RoomDisplay current = toInitiate[0];
 			toInitiate.RemoveAt(0);
-			
-			Debug.Log("Current room: " + current.RoomObject.name);
+
 			foreach(Room r in current.RoomObject.Neighbours) {
 				if(!AlreadyAdded(r, initiatedDisplays)) toInitiate.Add(CreateDisplay(r, GetNewImage()));
 			}
 			
 			if(lastRoom != null) {
-				Debug.Log(lastRoom.RoomObject.transform.position + " vs " + current.RoomObject.transform.position);
 				if(lastRoom.RoomObject.transform.position.x > current.RoomObject.transform.position.x) {
-					currentPos.x -= 21f; Debug.Log("GOING LEFT");
+					currentPos.x -= 21f;
 				}
 				else if(lastRoom.RoomObject.transform.position.x < current.RoomObject.transform.position.x) {
-					currentPos.x += 21f; Debug.Log("GOING RIGHT");
+					currentPos.x += 21f;
 				}
 				else if(lastRoom.RoomObject.transform.position.y > current.RoomObject.transform.position.y) {
-					currentPos.y -= 21f; Debug.Log("GOING DOWN");
+					currentPos.y -= 21f;
 				}
 				else {
-					currentPos.y += 21f; Debug.Log("GOING UP");
+					currentPos.y += 21f;
 				}
 			}
-			
-			Debug.Log("Setting position as " + currentPos);
+
 			current.RoomImage.rectTransform.anchoredPosition = new Vector2(currentPos.x, currentPos.y);
 			
 			initiatedDisplays.Add(current);

@@ -20,14 +20,23 @@ public class IncredibleAI : MonoBehaviour {
 			Vector3 toPlayer = player.transform.position - transform.position;
 			toPlayer = toPlayer.normalized;
 
-			if(dist < 4f) {
-				mover.Movement = Vector2.zero;
+			int mask = LayerMask.GetMask("Environment");
+			RaycastHit2D hit = Physics2D.Linecast(new Vector2(transform.position.x, transform.position.y), new Vector2(player.transform.position.x, player.transform.position.y), mask);
+
+			if(hit.collider == null) {
+				// Can see player!
+				if(dist < 4f) {
+					mover.Velocity = Vector2.zero;
+				}
+				else {
+					mover.Velocity = toPlayer;
+				}
 				weapons.AimTowards = toPlayer;
 				weapons.Firing = true;
 			}
 			else {
+				// Can't see player :(
 				weapons.Firing = false;
-				mover.Movement = toPlayer;
 			}
 		}
 	}

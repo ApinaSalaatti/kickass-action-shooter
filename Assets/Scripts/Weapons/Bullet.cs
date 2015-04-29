@@ -26,7 +26,7 @@ public class Bullet : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D col) {
 		di.DamagePosition = col.contacts[0].point;
-		di.DamageDirection = GetComponent<EntityMover>().Movement;
+		di.DamageDirection = GetComponent<EntityMover>().Velocity.normalized;
 		col.collider.gameObject.SendMessage("TakeDamage", di, SendMessageOptions.DontRequireReceiver);
 
 		DestroyableObject d = col.collider.gameObject.GetComponent<DestroyableObject>();

@@ -44,7 +44,8 @@ public class Weapon : MonoBehaviour {
 		// Add some inaccuracy
 		Vector2 aim = AimTowards + new Vector2(Random.Range(-inaccuracyModifier, inaccuracyModifier), Random.Range(-inaccuracyModifier, inaccuracyModifier));
 		aim = aim.normalized;
-		b.GetComponent<EntityMover>().Movement = aim;
+		EntityMover bulletMover = b.GetComponent<EntityMover>();
+		bulletMover.Velocity = aim * bulletMover.MaxSpeed;
 		
 		// Create a shell object
 		GameObject shell = Instantiate(shellPrefab, transform.position, Quaternion.identity) as GameObject;

@@ -7,6 +7,8 @@ public class WeaponManager : MonoBehaviour {
 
 	public void SetWeapon(Weapon w) {
 		if(w != null) {
+			if(currentWeapon != null) currentWeapon.Firing = false; // Stop the current weapon from firing
+
 			currentWeapon = w;
 			currentWeapon.gameObject.layer = gameObject.layer; // Set the "owner" of this weapon
 			currentWeapon.transform.position = transform.position;

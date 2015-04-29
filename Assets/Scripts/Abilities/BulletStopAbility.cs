@@ -5,10 +5,10 @@ using System.Collections.Generic;
 // A helper class to remember data about the affected bullets (mainly their original speed)
 public class StoppedBulletData {
 	public GameObject Bullet { get; set; }
-	public float OriginalSpeed { get; set; }
-	public StoppedBulletData(GameObject bullet, float origSpeed) {
+	public Vector2 OriginalVelocity { get; set; }
+	public StoppedBulletData(GameObject bullet, Vector2 origVel) {
 		Bullet = bullet;
-		OriginalSpeed = origSpeed;
+		OriginalVelocity = origVel;
 	}
 }
 
@@ -52,8 +52,7 @@ public class BulletStopAbility : Ability {
 		foreach(StoppedBulletData sbd in affectedBullets) {
 			GameObject bullet = sbd.Bullet;
 			EntityMover em = bullet.GetComponent<EntityMover>();
-			em.Movement *= -1f;
-			em.speed = 15f; // TODO: Just a number I randomly made up, figure out something cool maybe?
+			em.Velocity = sbd.OriginalVelocity.normalized * -1f * 15f; // TODO: Just a number I randomly made up, figure out something cool maybe?
 			bullet.layer = 10; // The bullets become player's bullets, woah!
 		}
 
@@ -82,8 +81,8 @@ public class BulletStopAbility : Ability {
 				float dst = Vector3.Distance(bullet.transform.position, Owner.transform.position);
 				float maxSpeed = Mathf.Max(0, dst - 1f);
 				EntityMover em = bullet.GetComponent<EntityMover>();
-				if(em.speed > maxSpeed)
-					em.speed = maxSpeed;
+				if(em.Velocity.magnitude > maxSpeed)
+					em.Velocity = em.Velocity.normalized * maxSpeed;
 			}
 		}
 
@@ -98,7 +97,7 @@ public class BulletStopAbility : Ability {
 		if(Active) {
 			Bullet b = col.gameObject.GetComponent<Bullet>();
 			if(b != null) {
-				affectedBullets.Add(new StoppedBulletData(b.gameObject, b.gameObject.GetComponent<EntityMover>().speed));
+				affectedBullets.Add(new StoppedBulletData(b.gameObject, b.gameObject.GetComponent<EntityMover>().Velocity));
 			}
 		}
 	}
@@ -111,7 +110,7 @@ public class BulletStopAbility : Ability {
 				StoppedBulletData sbd = FindBulletData(b.gameObject);
 				if(sbd != null) {
 					affectedBullets.Remove(sbd);
-					sbd.Bullet.GetComponent<EntityMover>().speed = sbd.OriginalSpeed;
+					sbd.Bullet.GetComponent<EntityMover>().Velocity = sbd.OriginalVelocity;
 				}
 			}
 		}
