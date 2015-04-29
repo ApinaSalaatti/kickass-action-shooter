@@ -19,9 +19,9 @@ public class BulletStopAbility : Ability {
 
 	void Awake() {
 		affectedBullets = new List<StoppedBulletData>();
+		ActivationCost = 0f;
+		CostPerSecond = 1f;
 	}
-
-	private float activeTimeLeft = 0f;
 
 	// When first activated, creates a "force field" that slows down bullets.
 	// Second activation (within activation time) sends the bullets flying to where they came from.
@@ -32,18 +32,18 @@ public class BulletStopAbility : Ability {
 		else {
 			GetComponent<ParticleSystem>().Play();
 			Active = true;
-			activeTimeLeft = 20f;
+		}
+	}
+
+	public override void Deactivate () {
+		if(Active) {
+			BounceBullets();
 		}
 	}
 
 	void Update () {
 		if(Active) {
 			UpdateEffect();
-
-			activeTimeLeft -= Time.deltaTime;
-			if(activeTimeLeft <= 0f) {
-				BounceBullets();
-			}
 		}
 	}
 
@@ -62,8 +62,6 @@ public class BulletStopAbility : Ability {
 
 	private void EndEffect() {
 		affectedBullets.Clear();
-		StartCooldown();
-		activeTimeLeft = 0f;
 		Active = false;
 		GetComponent<ParticleSystem>().Stop();
 	}

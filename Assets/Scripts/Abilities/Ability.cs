@@ -2,13 +2,7 @@
 using System.Collections;
 
 public abstract class Ability : MonoBehaviour {
-	public float Cooldown = 5f;
-
 	public GameObject Owner {
-		get; set;
-	}
-
-	public float CooldownLeft {
 		get; set;
 	}
 
@@ -16,9 +10,15 @@ public abstract class Ability : MonoBehaviour {
 		get; set;
 	}
 
-	public void StartCooldown() {
-		CooldownLeft = Cooldown;
+	// The power cost that is deducted instantly when this ability is activated
+	public float ActivationCost {
+		get; set;
+	}
+	// The amount of power this ability costs per second when active
+	public float CostPerSecond {
+		get; set;
 	}
 
 	public abstract void Activate();
+	public abstract void Deactivate();
 }
