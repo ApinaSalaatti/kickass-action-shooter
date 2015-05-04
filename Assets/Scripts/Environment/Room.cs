@@ -61,7 +61,8 @@ public class Room : MonoBehaviour {
 		cleared = true;
 		Debug.Log(gameObject.name + " ending...");
 
-		// Send an event to inform other objects so they can display a message to the player or something. This Component really doesn't care...
+		// Send an event to inform other objects about the great progress that has been made!
+		GameApplication.WorldState.Player.GetComponent<PlayerStatus>().AddScore(2000, "Room Cleared");
 		GameApplication.EventManager.QueueEvent(GameEvent.ROOM_CLEARED, this);
 
 		yield return new WaitForSeconds(5f);

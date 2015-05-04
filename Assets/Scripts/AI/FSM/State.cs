@@ -2,7 +2,7 @@
 using System.Collections;
 
 public abstract class State {
-	public enum AIStateType { SEARCHING, ATTACKING }
+	public enum AIStateType { SEARCHING, ATTACKING, WANDERING }
 
 	private AIStateType type;
 	public AIStateType Type { get { return type; } }

@@ -8,6 +8,11 @@ public class AttackingState : State {
 
 	public override AIStateType UpdateState ()
 	{
+		if(ParentAI.Perception.PlayerDead) {
+			ParentAI.Weapons.Firing = false;
+			return AIStateType.WANDERING;
+		}
+
 		if(!ParentAI.Perception.CanSeePlayer || ParentAI.Perception.DistanceFromPlayer >= ParentAI.AttackDistance) {
 			// Something's wrong, can't attack!
 			ParentAI.Weapons.Firing = false;

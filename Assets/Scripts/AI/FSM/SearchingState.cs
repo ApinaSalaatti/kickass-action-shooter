@@ -10,6 +10,10 @@ public class SearchingState : State {
 
 	public override AIStateType UpdateState ()
 	{
+		if(ParentAI.Perception.PlayerDead) {
+			return AIStateType.WANDERING;
+		}
+
 		if(ParentAI.Perception.CanSeePlayer) {
 			if(ParentAI.Perception.DistanceFromPlayer < ParentAI.AttackDistance) {
 				// We are close enough. Attack!

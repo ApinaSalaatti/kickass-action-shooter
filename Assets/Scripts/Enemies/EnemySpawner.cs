@@ -37,7 +37,7 @@ public class EnemySpawner : MonoBehaviour, IGameEventListener {
 		}
 
 		spawnTimer += Time.deltaTime;
-		if(spawnTimer >= 2f) {
+		if(spawnTimer >= 1f) {
 			spawnTimer = 0f;
 			SpawnEnemy();
 		}

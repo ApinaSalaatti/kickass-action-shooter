@@ -25,7 +25,6 @@ public class AbilityManager : MonoBehaviour, IGameEventListener {
 
 	void Awake() {
 		power = maxPower / 2f;
-		Debug.Log("INITING ABILITIES");
 		bulletStopAbility.Owner = this.gameObject;
 		dashAbility.Owner = this.gameObject;
 	}
@@ -66,7 +65,6 @@ public class AbilityManager : MonoBehaviour, IGameEventListener {
 
 	public void ReceiveEvent(GameEvent e) {
 		if(e.GameEventType == GameEvent.ENEMY_DEAD) {
-			Debug.Log(killPowerValue.ToString());
 			Power += killPowerValue;
 		}
 	}

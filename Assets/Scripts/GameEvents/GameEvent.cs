@@ -1,14 +1,26 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+// A helper class that encapsulates data about a scoring event
+public class PlayerScoredEventData {
+	public string ScoreText { get; set; }
+	public int AmountScored { get; set; }
+	public PlayerScoredEventData(string t, int a) {
+		ScoreText = t;
+		AmountScored = a;
+	}
+}
+
 public class GameEvent {
-	// All possible event types. Is there a better way to do this I dunno.
+	// All possible event types. There's probably some really cool and beautiful way to do this.
 	public static int BULLET_CREATED = 1;
 	public static int BULLET_REMOVED = 2;
 	public static int ENEMY_DEAD = 3;
 	public static int PLAYER_DEAD = 4;
 	public static int ROOM_CLEARED = 5;
 	public static int ROOM_STARTING = 6;
+	public static int PLAYER_SCORED = 7;
+	public static int PLAYER_HIT = 8;
 
 	private int gameEventType;
 	public int GameEventType {

@@ -7,6 +7,11 @@ public class Perceptions : MonoBehaviour {
 		get { return canSeePlayer; }
 	}
 
+	private bool playerDead = false;
+	public bool PlayerDead {
+		get { return playerDead; }
+	}
+
 	private GameObject player;
 	public GameObject Player {
 		get { return player; }
@@ -30,7 +35,13 @@ public class Perceptions : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-		player = GameApplication.WorldState.Player;
+		if(player == null || !player.activeSelf) {
+			playerDead = true;
+			return;
+		}
+		else {
+			playerDead = false;
+		}
 
 		Vector3 toPlayer = player.transform.position - transform.position;
 		distanceFromPlayer = toPlayer.magnitude;

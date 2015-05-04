@@ -10,6 +10,7 @@ public class DamageInfo {
 
 public class Bullet : MonoBehaviour {
 	public float damage = 2f;
+	public GameObject hitParticles; // Particles to spawn when we hit something
 
 	private DamageInfo di;
 
@@ -32,6 +33,8 @@ public class Bullet : MonoBehaviour {
 		DestroyableObject d = col.collider.gameObject.GetComponent<DestroyableObject>();
 		if(d == null) // If the object is a destroyable object, we'll just continue right through it. Whoo!
 			GetDestroyed();
+
+		Instantiate(hitParticles, transform.position, Quaternion.identity);
 	}
 
 	private void GetDestroyed() {

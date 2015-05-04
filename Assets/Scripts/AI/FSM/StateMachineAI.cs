@@ -69,6 +69,9 @@ public class StateMachineAI : MonoBehaviour {
 		case State.AIStateType.SEARCHING:
 			currentState = new SearchingState(this);
 			break;
+		case State.AIStateType.WANDERING:
+			currentState = new WanderingState(this);
+			break;
 		}
 	}
 }
