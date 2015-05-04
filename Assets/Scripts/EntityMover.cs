@@ -7,6 +7,7 @@ public class EntityMover : MonoBehaviour {
 	private float maxSpeed = 5f;
 	public float MaxSpeed {
 		get { return maxSpeed; }
+		set { maxSpeed = value; }
 	}
 
 	// This will be set elsewhere (by player input or an AI)

@@ -12,6 +12,7 @@ public class StoppedBulletData {
 	}
 }
 
+// Ability that slows down and stops all bullets within a certain radius of the player
 public class BulletStopAbility : Ability {
 	public float effectDistance = 5f;
 
@@ -19,8 +20,6 @@ public class BulletStopAbility : Ability {
 
 	void Awake() {
 		affectedBullets = new List<StoppedBulletData>();
-		ActivationCost = 0f;
-		CostPerSecond = 1f;
 	}
 
 	// When first activated, creates a "force field" that slows down bullets.

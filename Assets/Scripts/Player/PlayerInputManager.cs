@@ -44,8 +44,11 @@ public class PlayerInputManager : MonoBehaviour, IGameEventListener {
 		}
 
 		// Abilities
-		if(Input.GetButtonDown("Fire2")) {
-			playerAbilities.ActivateAbility();
+		if(Input.GetButtonDown("BulletStop")) {
+			playerAbilities.ActivateBulletStop();
+		}
+		if(Input.GetButtonDown("Dash")) {
+			playerAbilities.ActivateDash();
 		}
 	}
 

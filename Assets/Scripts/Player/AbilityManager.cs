@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 
 public class AbilityManager : MonoBehaviour, IGameEventListener {
-	public Ability[] abilities;
-
-	private List<GameObject> affectedBullets;
+	public Ability bulletStopAbility;
+	public Ability dashAbility;
 
 	[SerializeField]
 	private float killPowerValue = 0.3f;
@@ -24,23 +23,22 @@ public class AbilityManager : MonoBehaviour, IGameEventListener {
 		}
 	}
 
+	void Awake() {
+		power = maxPower / 2f;
+		Debug.Log("INITING ABILITIES");
+		bulletStopAbility.Owner = this.gameObject;
+		dashAbility.Owner = this.gameObject;
+	}
+
 	// Use this for initialization
 	void Start() {
-		power = maxPower / 2f;
-		foreach(Ability a in abilities) {
-			a.Owner = gameObject;
-		}
-
 		GameApplication.EventManager.RegisterListener(GameEvent.ENEMY_DEAD, this);
 	}
 
 	// Update is called once per frame
 	void Update () {
-		foreach(Ability a in abilities) {
-			if(a.Active) {
-				power -= a.CostPerSecond * Time.deltaTime;
-			}
-		}
+		if(bulletStopAbility.Active)
+			power -= bulletStopAbility.CostPerSecond * Time.deltaTime;
 
 		if(power <= 0f) {
 			power = 0f;
@@ -49,18 +47,20 @@ public class AbilityManager : MonoBehaviour, IGameEventListener {
 	}
 
 	private void PowerDepleted() {
-		foreach(Ability a in abilities) {
-			if(a.Active) {
-				a.Deactivate();
-			}
-		}
+		if(bulletStopAbility.Active)
+			bulletStopAbility.Deactivate();
 	}
 
-	public void ActivateAbility() {
-		if(power > 0f) {
-			if(power > abilities[0].ActivationCost) {
-				abilities[0].Activate();
-			}
+	public void ActivateBulletStop() {
+		if(power > 0f && power > bulletStopAbility.ActivationCost) {
+			power -= bulletStopAbility.ActivationCost;
+			bulletStopAbility.Activate();
+		}
+	}
+	public void ActivateDash() {
+		if(power > 0f && power >= dashAbility.ActivationCost) {
+			power -= dashAbility.ActivationCost;
+			dashAbility.Activate();
 		}
 	}
 

@@ -18,7 +18,7 @@ public class CameraMover : MonoBehaviour {
 			Vector3 posNoZ = transform.position;
 			posNoZ.z = target.transform.position.z;
 
-			Vector2 velocity = target.GetComponent<EntityMover>().Velocity;
+			Vector2 velocity = target.GetComponent<EntityMover>().Velocity.normalized * 5f;
 			Vector3 velOffset = new Vector3(velocity.x, velocity.y, 0f); // velOffset makes the camera show a bit more of what's in front of the player when moving
 			Vector3 targetDirection = (target.transform.position + velOffset - posNoZ);
 			

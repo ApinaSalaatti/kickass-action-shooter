@@ -11,12 +11,18 @@ public abstract class Ability : MonoBehaviour {
 	}
 
 	// The power cost that is deducted instantly when this ability is activated
+	[SerializeField]
+	private float activationCost;
 	public float ActivationCost {
-		get; set;
+		get { return activationCost; }
+		set { activationCost = value; }
 	}
 	// The amount of power this ability costs per second when active
+	[SerializeField]
+	private float costPerSecond;
 	public float CostPerSecond {
-		get; set;
+		get { return costPerSecond; }
+		set { costPerSecond = value; }
 	}
 
 	public abstract void Activate();
