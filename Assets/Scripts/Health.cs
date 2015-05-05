@@ -13,13 +13,15 @@ public class Health : MonoBehaviour {
 	void Start () {
 		currentHealth = maxHealth;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+
+	public void GetHealed(float amount) {
+		Debug.Log("Healing for " + amount);
+		currentHealth += amount;
+		currentHealth = Mathf.Min(maxHealth, currentHealth);
+		SendMessage("OnHeal", amount, SendMessageOptions.DontRequireReceiver);
 	}
 
-	void TakeDamage(DamageInfo di) {
+	public void TakeDamage(DamageInfo di) {
 		float dmg = di.DamageAmount;
 
 		currentHealth -= dmg;

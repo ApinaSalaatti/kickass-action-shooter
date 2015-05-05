@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
+// A class with global access from the GameApplication class.
+// This class contains helpers and pointers to objects that relate to the game world (i.e. no stuff that affects the UI)
 public class WorldState : MonoBehaviour, IGameEventListener {
 	[SerializeField]
 	private GameObject player;
@@ -13,9 +15,16 @@ public class WorldState : MonoBehaviour, IGameEventListener {
 		get { return bullets; }
 	}
 
+	private PickupCreator pickupCreator;
+	public PickupCreator PickupCreator {
+		get { return pickupCreator; }
+	}
+
 	// Use this for initialization
 	void Awake() {
 		bullets = new List<GameObject>();
+
+		pickupCreator = GetComponent<PickupCreator>();
 	}
 
 	void Start() {
