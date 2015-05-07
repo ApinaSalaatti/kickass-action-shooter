@@ -3,7 +3,7 @@ using System.Collections;
 
 public class EnemySpawner : MonoBehaviour, IGameEventListener {
 	[SerializeField]
-	private GameObject enemyPrefab;
+	private GameObject[] enemyPrefabs;
 	[SerializeField]
 	private GameObject[] weaponPrefabs;
 
@@ -56,7 +56,8 @@ public class EnemySpawner : MonoBehaviour, IGameEventListener {
 		//direction = direction * 10f;
 		//Vector3 pos = new Vector3(transform.position.x+direction.x, transform.position.y+direction.y, 0);
 		Vector3 pos = SelectRandomSpawnPoint();
-		GameObject e = Instantiate(enemyPrefab, pos, Quaternion.identity) as GameObject;
+		GameObject e = CreateRandomEnemy(pos);
+		//GameObject e = Instantiate(enemyPrefab, pos, Quaternion.identity) as GameObject;
 		SetRandomWeapon(e);
 
 		amountOfEnemiesToSpawn--;
@@ -66,15 +67,23 @@ public class EnemySpawner : MonoBehaviour, IGameEventListener {
 		}
 	}
 
+	private GameObject CreateRandomEnemy(Vector3 pos) {
+		int r = Random.Range(0, enemyPrefabs.Length);
+		return Instantiate(enemyPrefabs[r], pos, Quaternion.identity) as GameObject;
+	}
+
 	private Vector3 SelectRandomSpawnPoint() {
 		int r = Random.Range(0, spawnPoints.Length);
 		return spawnPoints[r].position;
 	}
 
 	private void SetRandomWeapon(GameObject enemy) {
-		int r = Random.Range(0, weaponPrefabs.Length);
-		GameObject w = Instantiate(weaponPrefabs[r]) as GameObject;
-		enemy.GetComponent<WeaponManager>().SetWeapon(w.GetComponent<Weapon>());
+		WeaponManager wm = enemy.GetComponent<WeaponManager>();
+		if(wm != null) {
+			int r = Random.Range(0, weaponPrefabs.Length);
+			GameObject w = Instantiate(weaponPrefabs[r]) as GameObject;
+			wm.SetWeapon(w.GetComponent<Weapon>());
+		}
 	}
 
 	public void ReceiveEvent(GameEvent e) {

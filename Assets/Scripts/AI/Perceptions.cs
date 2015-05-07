@@ -29,7 +29,7 @@ public class Perceptions : MonoBehaviour {
 	}
 
 	// Use this for initialization
-	void Awake() {
+	void Start() {
 		player = GameApplication.WorldState.Player;
 	}
 	

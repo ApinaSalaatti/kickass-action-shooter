@@ -3,7 +3,7 @@ using System.Collections;
 
 public class ExplosiveObject : MonoBehaviour {
 	public GameObject particleEffect;
-	public float explosionRange = 5f;
+	public float explosionRange = 2f;
 	public float damage = 5f;
 
 	private bool exploded = false;
@@ -27,9 +27,7 @@ public class ExplosiveObject : MonoBehaviour {
 		exploded = true; // To prevent multiple explosions from triggering each other continuously
 
 		// Spawn cool particles
-		GameObject particles = Instantiate(particleEffect, transform.position, Quaternion.identity) as GameObject;
-		float time = particles.GetComponent<ParticleSystem>().duration;
-		Destroy(particles, time); // Destroy the particle object after the effect is done
+		Instantiate(particleEffect, transform.position, Quaternion.identity);
 
 		// Make the screen SHAKE
 		CameraEffects.StartShake(0.5f, 0.1f);
@@ -37,6 +35,8 @@ public class ExplosiveObject : MonoBehaviour {
 		// Find who we hit and HURT them
 		Collider2D[] cols = Physics2D.OverlapCircleAll(transform.position, explosionRange);
 		foreach(Collider2D col in cols) {
+			if(col.gameObject == gameObject) continue; // We don't need to hurt ourself
+
 			DamageInfo di = new DamageInfo();
 			Vector3 dir = (col.gameObject.transform.position - transform.position).normalized; // Direction from explosion to victim. Will be used a few times
 			di.DamageAmount = damage;

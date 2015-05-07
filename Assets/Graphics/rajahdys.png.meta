@@ -1,0 +1,132 @@
+fileFormatVersion: 2
+guid: af21c83c680b67245b75704c6cec4af1
+timeCreated: 1430994796
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: rajahdys_0
+    21300002: rajahdys_1
+    21300004: rajahdys_2
+    21300006: rajahdys_3
+    21300008: rajahdys_4
+    21300010: rajahdys_5
+    21300012: rajahdys_6
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: rajahdys_0
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 123
+        width: 110
+        height: 119
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: rajahdys_1
+      rect:
+        serializedVersion: 2
+        x: 239
+        y: 107
+        width: 164
+        height: 164
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: rajahdys_2
+      rect:
+        serializedVersion: 2
+        x: 513
+        y: 83
+        width: 270
+        height: 253
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: rajahdys_3
+      rect:
+        serializedVersion: 2
+        x: 906
+        y: 46
+        width: 372
+        height: 355
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: rajahdys_4
+      rect:
+        serializedVersion: 2
+        x: 1531
+        y: 13
+        width: 417
+        height: 425
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: rajahdys_5
+      rect:
+        serializedVersion: 2
+        x: 2124
+        y: 95
+        width: 351
+        height: 351
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: rajahdys_6
+      rect:
+        serializedVersion: 2
+        x: 2623
+        y: 119
+        width: 314
+        height: 307
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

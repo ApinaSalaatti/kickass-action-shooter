@@ -2,8 +2,9 @@
 using System.Collections;
 
 public class AttackingState : State {
-	public AttackingState(StateMachineAI parentAI) : base(parentAI, AIStateType.ATTACKING) {
-		
+
+	void Awake() {
+		StateType = AIStateType.ATTACKING;
 	}
 
 	public override AIStateType UpdateState ()

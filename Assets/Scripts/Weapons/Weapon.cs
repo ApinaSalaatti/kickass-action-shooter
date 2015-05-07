@@ -2,11 +2,20 @@
 using System.Collections;
 
 public class Weapon : MonoBehaviour {
-	public float fireInterval = 0.2f;
-	public float inaccuracyModifier = 0.1f;
-	
-	public GameObject bulletPrefab;
-	public GameObject shellPrefab;
+	[SerializeField]
+	private float fireInterval = 0.2f;
+	[SerializeField]
+	private float inaccuracyModifier = 0.1f;
+
+	[SerializeField]
+	private float bulletSpawnDistance = 0f; // How far from the object the bullet will spawn (i.e. how long is the mouth of the gun)
+	[SerializeField]
+	private MuzzleFlash muzzleFlash;
+
+	[SerializeField]
+	private GameObject bulletPrefab;
+	[SerializeField]
+	private GameObject shellPrefab;
 	
 	// These will always be set from outside, i.e. by AI or player input
 	public bool Firing {
@@ -33,7 +42,9 @@ public class Weapon : MonoBehaviour {
 	}
 
 	private void Fire() {
-		GameObject b = Instantiate(bulletPrefab, transform.position, Quaternion.identity) as GameObject;
+		// Calculate position for the bullet
+		Vector3 bOffset = new Vector3(AimTowards.x, AimTowards.y, 0f) * bulletSpawnDistance;
+		GameObject b = Instantiate(bulletPrefab, transform.position + bOffset, Quaternion.identity) as GameObject;
 		
 		// Set a correct layer (Enemy Bullet or Player Bullet) to prevent bullets from stupidly colliding with each other
 		if(gameObject.layer == 8)
@@ -54,5 +65,8 @@ public class Weapon : MonoBehaviour {
 		shell.GetComponent<Rigidbody2D>().AddTorque(Random.Range(-5f, 5f), ForceMode2D.Impulse);
 		
 		GameApplication.EventManager.QueueEvent(GameEvent.BULLET_CREATED, b);
+
+		// Display muzzle flash
+		muzzleFlash.Show();
 	}
 }

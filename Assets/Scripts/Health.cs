@@ -28,7 +28,7 @@ public class Health : MonoBehaviour {
 
 		SendMessage("OnDamage", di, SendMessageOptions.DontRequireReceiver);
 		if(currentHealth <= 0) {
-			SendMessage("OnDeath", SendMessageOptions.DontRequireReceiver);
+			SendMessage("OnDeath", di, SendMessageOptions.DontRequireReceiver);
 			Destroy(gameObject);
 		}
 	}

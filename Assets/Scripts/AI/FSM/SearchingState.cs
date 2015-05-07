@@ -4,8 +4,13 @@ using System.Collections;
 // The AI is in this state if it's either too far from the player to attack or doesn't have a clear line of sight
 // In other words, it's not really SEARCHING for the player as the AI always knows the player's location
 public class SearchingState : State {
+	/*
 	public SearchingState(StateMachineAI parentAI) : base(parentAI, AIStateType.SEARCHING) {
 		
+	}*/
+
+	void Awake() {
+		StateType = AIStateType.SEARCHING;
 	}
 
 	public override AIStateType UpdateState ()

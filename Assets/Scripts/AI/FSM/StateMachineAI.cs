@@ -9,6 +9,14 @@ using System.Collections;
  * The AI always knows where the player is, so it never REALLY searches for the player
  */
 public class StateMachineAI : MonoBehaviour {
+	// The states for this AI
+	[SerializeField]
+	private State attackingState;
+	[SerializeField]
+	private State searchingState;
+	[SerializeField]
+	private State wanderingState;
+
 	private Perceptions perception;
 	public Perceptions Perception {
 		get { return perception; }
@@ -31,9 +39,18 @@ public class StateMachineAI : MonoBehaviour {
 		get { return steering; }
 	}
 
-	// If the AI is closer than this distance, it will start firing at the player. Set it to a larger value to have enemies be more "aggressive"
+	// If the AI is closer than this distance, it will use its attack (shoot or explode or whatever)
+	[SerializeField]
+	private float attackDistance;
 	public float AttackDistance {
-		get; set;
+		get { return attackDistance; }
+		set { attackDistance = value; }
+	}
+
+	void Awake() {
+		attackingState.ParentAI = this;
+		searchingState.ParentAI = this;
+		wanderingState.ParentAI = this;
 	}
 
 	// Use this for initialization
@@ -45,18 +62,24 @@ public class StateMachineAI : MonoBehaviour {
 		weapons = GetComponent<WeaponManager>();
 		mover = GetComponent<EntityMover>();
 
-		currentState = new SearchingState(this);
-
-		AttackDistance = 7f;
+		currentState = searchingState;
 	}
 
 	void Update () {
 		State.AIStateType s = currentState.UpdateState();
-		if(s != currentState.Type) {
+		if(s != currentState.StateType) {
 			ChangeState(s);
 		}
 
 		Mover.Velocity = steering.CalculateDirection() * Mover.MaxSpeed;
+
+		// All the enemies just face the player all the time
+		if(!perception.PlayerDead) {
+			Vector3 dir = GameApplication.WorldState.Player.transform.position - transform.position;
+			float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90;
+			Vector3 rotationVector = new Vector3 (0, 0, angle);
+			transform.rotation = Quaternion.Euler(rotationVector);
+		}
 	}
 
 	private void ChangeState(State.AIStateType type) {
@@ -64,13 +87,13 @@ public class StateMachineAI : MonoBehaviour {
 
 		switch(type) {
 		case State.AIStateType.ATTACKING:
-			currentState = new AttackingState(this);
+			currentState = attackingState;
 			break;
 		case State.AIStateType.SEARCHING:
-			currentState = new SearchingState(this);
+			currentState = searchingState;
 			break;
 		case State.AIStateType.WANDERING:
-			currentState = new WanderingState(this);
+			currentState = wanderingState;
 			break;
 		}
 	}

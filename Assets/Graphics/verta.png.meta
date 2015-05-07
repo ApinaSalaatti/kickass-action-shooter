@@ -1,0 +1,363 @@
+fileFormatVersion: 2
+guid: 8a921a84eadf9c441b7ac291b03faf56
+timeCreated: 1430923317
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: verta_0
+    21300002: verta_1
+    21300004: verta_2
+    21300006: verta_3
+    21300008: verta_4
+    21300010: verta_5
+    21300012: verta_6
+    21300014: verta_7
+    21300016: verta_8
+    21300018: verta_9
+    21300020: verta_10
+    21300022: verta_11
+    21300024: verta_12
+    21300026: verta_13
+    21300028: verta_14
+    21300030: verta_15
+    21300032: verta_16
+    21300034: verta_17
+    21300036: verta_18
+    21300038: verta_19
+    21300040: verta_20
+    21300042: verta_21
+    21300044: verta_22
+    21300046: verta_23
+    21300048: verta_24
+    21300050: verta_25
+    21300052: verta_26
+    21300054: verta_27
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 400
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: verta_0
+      rect:
+        serializedVersion: 2
+        x: 563
+        y: 1912
+        width: 146
+        height: 241
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: verta_1
+      rect:
+        serializedVersion: 2
+        x: 516
+        y: 2196
+        width: 57
+        height: 100
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: verta_2
+      rect:
+        serializedVersion: 2
+        x: 335
+        y: 2133
+        width: 80
+        height: 163
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: verta_3
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 2143
+        width: 68
+        height: 98
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: verta_4
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 1874
+        width: 98
+        height: 168
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: verta_5
+      rect:
+        serializedVersion: 2
+        x: 123
+        y: 1733
+        width: 93
+        height: 171
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: verta_6
+      rect:
+        serializedVersion: 2
+        x: 392
+        y: 1534
+        width: 96
+        height: 262
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: verta_7
+      rect:
+        serializedVersion: 2
+        x: 853
+        y: 2128
+        width: 83
+        height: 229
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: verta_8
+      rect:
+        serializedVersion: 2
+        x: 1071
+        y: 2148
+        width: 91
+        height: 254
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: verta_9
+      rect:
+        serializedVersion: 2
+        x: 1180
+        y: 2133
+        width: 70
+        height: 254
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: verta_10
+      rect:
+        serializedVersion: 2
+        x: 1255
+        y: 2118
+        width: 38
+        height: 229
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: verta_11
+      rect:
+        serializedVersion: 2
+        x: 1841
+        y: 2012
+        width: 96
+        height: 239
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: verta_12
+      rect:
+        serializedVersion: 2
+        x: 1059
+        y: 1839
+        width: 83
+        height: 128
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: verta_13
+      rect:
+        serializedVersion: 2
+        x: 1147
+        y: 1534
+        width: 48
+        height: 164
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: verta_14
+      rect:
+        serializedVersion: 2
+        x: 998
+        y: 1547
+        width: 78
+        height: 179
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: verta_15
+      rect:
+        serializedVersion: 2
+        x: 1569
+        y: 1833
+        width: 63
+        height: 221
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: verta_16
+      rect:
+        serializedVersion: 2
+        x: 860
+        y: 1372
+        width: 55
+        height: 129
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: verta_17
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1591
+        width: 70
+        height: 234
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: verta_18
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 1418
+        width: 45
+        height: 108
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: verta_19
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 1229
+        width: 48
+        height: 98
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: verta_20
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 1154
+        width: 60
+        height: 193
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: verta_21
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 933
+        width: 53
+        height: 123
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: verta_22
+      rect:
+        serializedVersion: 2
+        x: 1278
+        y: 1547
+        width: 48
+        height: 121
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: verta_23
+      rect:
+        serializedVersion: 2
+        x: 1271
+        y: 1894
+        width: 30
+        height: 101
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: verta_24
+      rect:
+        serializedVersion: 2
+        x: 1356
+        y: 1887
+        width: 43
+        height: 115
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: verta_25
+      rect:
+        serializedVersion: 2
+        x: 1444
+        y: 2148
+        width: 50
+        height: 123
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: verta_26
+      rect:
+        serializedVersion: 2
+        x: 1748
+        y: 2279
+        width: 36
+        height: 73
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: verta_27
+      rect:
+        serializedVersion: 2
+        x: 1494
+        y: 1731
+        width: 38
+        height: 118
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
