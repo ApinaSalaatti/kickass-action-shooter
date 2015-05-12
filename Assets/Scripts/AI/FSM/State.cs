@@ -2,7 +2,7 @@
 using System.Collections;
 
 public abstract class State : MonoBehaviour {
-	public enum AIStateType { SEARCHING, ATTACKING, WANDERING }
+	public enum AIStateType { SPAWNING, SEARCHING, ATTACKING, WANDERING }
 
 	private AIStateType stateType;
 	public AIStateType StateType {

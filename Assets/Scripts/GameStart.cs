@@ -10,6 +10,7 @@ public class GameStart : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		firstRoom.SetActive(true);
+		GameApplication.AudioPlayer.PlayMusic("action");
 	}
 	
 	// Update is called once per frame

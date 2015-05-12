@@ -1,0 +1,165 @@
+fileFormatVersion: 2
+guid: da59562bf2343ed4e9508b4e9a44e948
+timeCreated: 1431377099
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: rajahdysjaljet_0
+    21300002: rajahdysjaljet_1
+    21300004: rajahdysjaljet_2
+    21300006: rajahdysjaljet_3
+    21300008: rajahdysjaljet_4
+    21300010: rajahdysjaljet_5
+    21300012: rajahdysjaljet_6
+    21300014: rajahdysjaljet_7
+    21300016: rajahdysjaljet_8
+    21300018: rajahdysjaljet_9
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 200
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: rajahdysjaljet_0
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 293
+        width: 115
+        height: 230
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: rajahdysjaljet_1
+      rect:
+        serializedVersion: 2
+        x: 238
+        y: 379
+        width: 146
+        height: 204
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: rajahdysjaljet_2
+      rect:
+        serializedVersion: 2
+        x: 424
+        y: 454
+        width: 45
+        height: 83
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: rajahdysjaljet_3
+      rect:
+        serializedVersion: 2
+        x: 508
+        y: 399
+        width: 92
+        height: 158
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: rajahdysjaljet_4
+      rect:
+        serializedVersion: 2
+        x: 665
+        y: 409
+        width: 166
+        height: 194
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: rajahdysjaljet_5
+      rect:
+        serializedVersion: 2
+        x: 117
+        y: 21
+        width: 89
+        height: 181
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: rajahdysjaljet_6
+      rect:
+        serializedVersion: 2
+        x: 268
+        y: 55
+        width: 93
+        height: 155
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: rajahdysjaljet_7
+      rect:
+        serializedVersion: 2
+        x: 393
+        y: 63
+        width: 134
+        height: 194
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: rajahdysjaljet_8
+      rect:
+        serializedVersion: 2
+        x: 564
+        y: 46
+        width: 129
+        height: 239
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: rajahdysjaljet_9
+      rect:
+        serializedVersion: 2
+        x: 697
+        y: 60
+        width: 135
+        height: 216
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

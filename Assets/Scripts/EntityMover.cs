@@ -16,15 +16,19 @@ public class EntityMover : MonoBehaviour {
 	}
 
 	private new Rigidbody2D rigidbody; // NOTE TO SELF: The 'new' keyword means this variable hides an inherited member variable
+	private Animator animator;
 
 	// Use this for initialization
 	void Awake() {
 		rigidbody = GetComponent<Rigidbody2D>();
+		animator = GetComponent<Animator>();
 		Velocity = new Vector2(0f, 0f);
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		rigidbody.velocity = Velocity;
+		if(animator != null)
+			animator.SetFloat("Speed", Velocity.magnitude);
 	}
 }

@@ -9,10 +9,20 @@ public class WorldState : MonoBehaviour, IGameEventListener {
 	public GameObject Player {
 		get { return player; }
 	}
+	public bool PlayerDead {
+		get { return player == null; }
+	}
 
+	// A list of all the bullets in the world
 	private List<GameObject> bullets;
 	public List<GameObject> Bullets {
 		get { return bullets; }
+	}
+
+	// A list of all the enemies in the world
+	private List<GameObject> enemies;
+	public List<GameObject> Enemies {
+		get { return enemies; }
 	}
 
 	private PickupCreator pickupCreator;
@@ -23,6 +33,7 @@ public class WorldState : MonoBehaviour, IGameEventListener {
 	// Use this for initialization
 	void Awake() {
 		bullets = new List<GameObject>();
+		enemies = new List<GameObject>();
 
 		pickupCreator = GetComponent<PickupCreator>();
 	}
@@ -31,6 +42,8 @@ public class WorldState : MonoBehaviour, IGameEventListener {
 		GameApplication.EventManager.RegisterListener(GameEvent.BULLET_CREATED, this);
 		GameApplication.EventManager.RegisterListener(GameEvent.BULLET_REMOVED, this);
 		GameApplication.EventManager.RegisterListener(GameEvent.PLAYER_DEAD, this);
+		GameApplication.EventManager.RegisterListener(GameEvent.ENEMY_SPAWNED, this);
+		GameApplication.EventManager.RegisterListener(GameEvent.ENEMY_DEAD, this);
 	}
 	
 	// Update is called once per frame
@@ -47,6 +60,12 @@ public class WorldState : MonoBehaviour, IGameEventListener {
 		}
 		else if(e.GameEventType == GameEvent.PLAYER_DEAD) {
 			player = null;
+		}
+		else if(e.GameEventType == GameEvent.ENEMY_SPAWNED) {
+			enemies.Add(e.GameEventData as GameObject);
+		}
+		else if(e.GameEventType == GameEvent.ENEMY_DEAD) {
+			enemies.Remove(e.GameEventData as GameObject);
 		}
 	}
 }

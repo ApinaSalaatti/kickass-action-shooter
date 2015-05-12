@@ -2,8 +2,11 @@
 using System.Collections;
 
 public class PowerPickup : Pickup {
+	[SerializeField]
+	private float amountRestored = 0f;
 	public float AmountRestored {
-		get; set;
+		get { return amountRestored; }
+		set { amountRestored = value; }
 	}
 	
 	public override bool GetPickedUp (GameObject picker)

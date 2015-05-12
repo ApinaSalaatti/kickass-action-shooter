@@ -2,7 +2,20 @@
 using System.Collections;
 
 public class Health : MonoBehaviour {
-	public float maxHealth = 10f;
+	[SerializeField]
+	private float maxHealth = 10f;
+	public float MaxHealth {
+		get { return maxHealth; }
+		set { maxHealth = value; }
+	}
+
+	// If true, this entity will take no damage and cannot die
+	[SerializeField]
+	private bool invincible = false;
+	public bool Invincible {
+		get { return invincible; }
+		set { invincible = value; }
+	}
 
 	private float currentHealth;
 	public float CurrentHealth {
@@ -24,8 +37,10 @@ public class Health : MonoBehaviour {
 	public void TakeDamage(DamageInfo di) {
 		float dmg = di.DamageAmount;
 
-		currentHealth -= dmg;
+		if(!invincible)
+			currentHealth -= dmg;
 
+		// Send messages even when not invincible
 		SendMessage("OnDamage", di, SendMessageOptions.DontRequireReceiver);
 		if(currentHealth <= 0) {
 			SendMessage("OnDeath", di, SendMessageOptions.DontRequireReceiver);

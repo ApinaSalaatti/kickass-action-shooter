@@ -12,6 +12,7 @@ public class WeaponManager : MonoBehaviour {
 			currentWeapon = w;
 			currentWeapon.gameObject.layer = gameObject.layer; // Set the "owner" of this weapon
 			currentWeapon.transform.position = transform.position;
+			currentWeapon.transform.rotation = transform.rotation;
 			currentWeapon.transform.SetParent(transform);
 		}
 	}

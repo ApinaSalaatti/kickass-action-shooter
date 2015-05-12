@@ -2,9 +2,15 @@
 using System.Collections;
 
 public class ExplosiveObject : MonoBehaviour {
-	public GameObject particleEffect;
-	public float explosionRange = 2f;
-	public float damage = 5f;
+	[SerializeField]
+	private GameObject particleEffect;
+	[SerializeField]
+	private GameObject craterPrefab;
+
+	[SerializeField]
+	private float explosionRange = 2f;
+	[SerializeField]
+	private float damage = 5f;
 
 	private bool exploded = false;
 
@@ -28,6 +34,9 @@ public class ExplosiveObject : MonoBehaviour {
 
 		// Spawn cool particles
 		Instantiate(particleEffect, transform.position, Quaternion.identity);
+
+		// Create a neato crater with a random rotation
+		Instantiate(craterPrefab, transform.position, Quaternion.Euler(0f, 0f, Random.Range(0, 360f)));
 
 		// Make the screen SHAKE
 		CameraEffects.StartShake(0.5f, 0.1f);

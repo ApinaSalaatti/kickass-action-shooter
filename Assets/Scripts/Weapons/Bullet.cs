@@ -1,13 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-// A helper class that encapsulates information about a damage event
-public class DamageInfo {
-	public float DamageAmount { get; set; }
-	public Vector2 DamagePosition { get; set; }
-	public Vector2 DamageDirection { get; set; }
-}
-
 public class Bullet : MonoBehaviour {
 	public float damage = 2f;
 	public GameObject hitParticles; // Particles to spawn when we hit something
@@ -26,15 +19,23 @@ public class Bullet : MonoBehaviour {
 	}
 
 	void OnCollisionEnter2D(Collision2D col) {
-		di.DamagePosition = col.contacts[0].point;
-		di.DamageDirection = GetComponent<EntityMover>().Velocity.normalized;
-		col.collider.gameObject.SendMessage("TakeDamage", di, SendMessageOptions.DontRequireReceiver);
+		ApplyDamage(col.collider.gameObject, col.contacts[0].point);
 
 		DestroyableObject d = col.collider.gameObject.GetComponent<DestroyableObject>();
 		if(d == null) // If the object is a destroyable object, we'll just continue right through it. Whoo!
 			GetDestroyed();
 
 		Instantiate(hitParticles, transform.position, Quaternion.identity);
+	}
+
+	void OnTriggerEnter2D(Collider2D col) {
+		ApplyDamage(col.gameObject, transform.position);
+	}
+
+	private void ApplyDamage(GameObject go, Vector2 pos) {
+		di.DamagePosition = pos;
+		di.DamageDirection = GetComponent<EntityMover>().Velocity.normalized;
+		go.SendMessage("TakeDamage", di, SendMessageOptions.DontRequireReceiver);
 	}
 
 	private void GetDestroyed() {

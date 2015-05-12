@@ -18,7 +18,9 @@ public class Scorable : MonoBehaviour {
 
 	void OnDeath() {
 		// When a scorable entity dies give player points and spawn a cool effect celebrating the fact
-		GameApplication.WorldState.Player.GetComponent<PlayerStatus>().AddScore(scoreValue, "KILL");
+		if(!GameApplication.WorldState.PlayerDead)
+			GameApplication.WorldState.Player.GetComponent<PlayerStatus>().AddScore(scoreValue, "KILL");
+
 		GameObject s = Instantiate(scoreEffect, transform.position, Quaternion.identity) as GameObject;
 		s.GetComponent<TextEffect>().TextToDisplay = "+" + scoreValue.ToString();
 	}

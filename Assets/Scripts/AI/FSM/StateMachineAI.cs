@@ -11,11 +11,20 @@ using System.Collections;
 public class StateMachineAI : MonoBehaviour {
 	// The states for this AI
 	[SerializeField]
+	private State spawningState;
+	[SerializeField]
 	private State attackingState;
 	[SerializeField]
 	private State searchingState;
 	[SerializeField]
 	private State wanderingState;
+
+	// This is the spot in the world where the AI must first get to when spawning
+	// It's just to make them walk straight out of the elevator
+	// Will be set by the EnemySpawner
+	public Transform SpawnTarget {
+		get; set;
+	}
 
 	private Perceptions perception;
 	public Perceptions Perception {
@@ -48,6 +57,7 @@ public class StateMachineAI : MonoBehaviour {
 	}
 
 	void Awake() {
+		spawningState.ParentAI = this;
 		attackingState.ParentAI = this;
 		searchingState.ParentAI = this;
 		wanderingState.ParentAI = this;
@@ -62,7 +72,7 @@ public class StateMachineAI : MonoBehaviour {
 		weapons = GetComponent<WeaponManager>();
 		mover = GetComponent<EntityMover>();
 
-		currentState = searchingState;
+		currentState = spawningState;
 	}
 
 	void Update () {

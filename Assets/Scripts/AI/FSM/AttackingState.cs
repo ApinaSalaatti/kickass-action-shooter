@@ -14,6 +14,8 @@ public class AttackingState : State {
 			return AIStateType.WANDERING;
 		}
 
+		ParentAI.EntitySteering.PursuitTarget = ParentAI.Perception.Player.transform;
+
 		if(!ParentAI.Perception.CanSeePlayer || ParentAI.Perception.DistanceFromPlayer >= ParentAI.AttackDistance) {
 			// Something's wrong, can't attack!
 			ParentAI.Weapons.Firing = false;

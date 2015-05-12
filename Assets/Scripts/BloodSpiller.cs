@@ -8,11 +8,11 @@ public class BloodSpiller : MonoBehaviour {
 	[SerializeField]
 	private GameObject bloodPrefab; // A pool of blood object that will remain in the game world
 	[SerializeField]
-	private Sprite[] bloodSprites; // A collection of sprites used for the pool of blood object
-	[SerializeField]
 	private GameObject bloodExplosion; // An EXPLOSION OF BLOOD that happens when this object dies
 	[SerializeField]
 	private GameObject corpsePrefab; // A prefab of a DEAD PERSON
+	[SerializeField]
+	private GameObject bodyPartPrefab; // A prefab of a PART of a DEAD PERSON (for deaths from explosions)
 
 	// Use this for initialization
 	void Start () {
@@ -32,9 +32,7 @@ public class BloodSpiller : MonoBehaviour {
 		// Spawn the particle effect in the direction of the damage
 		float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90f; // It seems the particles need to be turned an additional 90 degrees for some reason
 		Quaternion q = Quaternion.Euler(0f, 0f, angle);
-		GameObject b = Instantiate(bloodCloudPrefab, transform.position, q) as GameObject;
-		float time = b.GetComponent<ParticleSystem>().duration;
-		Destroy(b, time); // Destroy the object after the effect is done
+		Instantiate(bloodCloudPrefab, transform.position, q);
 
 		// Spawn a random number of blood pools roughly into the direction of the damage
 		int r = Random.Range(3, 10);
@@ -43,23 +41,49 @@ public class BloodSpiller : MonoBehaviour {
 			// Add a bit of randomness to the position
 			pos.x += Random.Range(-0.2f, 0.2f);
 			pos.y += Random.Range(-0.2f, 0.2f);
-			GameObject blood = Instantiate(bloodPrefab, pos, q) as GameObject;
-			// Choose a random sprite for the blood
-			r = Random.Range(0, bloodSprites.Length);
-			blood.GetComponent<SpriteRenderer>().sprite = bloodSprites[r];
+
+			Instantiate(bloodPrefab, pos, q);
 		}
 	}
 
 	void OnDeath(DamageInfo di) {
-		GameObject be = Instantiate(bloodExplosion, transform.position, Quaternion.identity) as GameObject;
-		float time = be.GetComponent<ParticleSystem>().duration;
-		Destroy(be, time); // Destroy the object after the effect is done
+		Instantiate(bloodExplosion, transform.position, Quaternion.identity);
 
+		if(di.DamageType == DamageInfo.DType.EXPLOSION) {
+			ThrowBodyParts(di);
+		}
+		else {
+			MakeCorpse(di);
+		}
+	}
+
+	private void MakeCorpse(DamageInfo di) {
 		// Spawn a corpse object
 		float angle = Mathf.Atan2(di.DamageDirection.y, di.DamageDirection.x) * Mathf.Rad2Deg - 90f;
 		Quaternion q = Quaternion.Euler(0f, 0f, angle);
 		GameObject c = Instantiate(corpsePrefab, transform.position+new Vector3(di.DamageDirection.x/3f, di.DamageDirection.y/3f, 0f), q) as GameObject;
 		// Make the corpse fly backwards
 		c.GetComponent<Rigidbody2D>().AddForce(di.DamageDirection*2f, ForceMode2D.Impulse);
+	}
+
+	private void ThrowBodyParts(DamageInfo di) {
+		// Oh we exploded? Let's spawn a random number of body parts!
+		int r = Random.Range(2, 8);
+		for(int i = 0; i < r; i++) {
+			GameObject part = Instantiate(bodyPartPrefab, transform.position, Quaternion.identity) as GameObject;
+			//Vector2 dir = (di.DamageDirection + new Vector2(Random.Range(-0.2f, 0.2f), Random.Range(-0.2f, 0.2f))) * 10f;
+			Vector2 dir;
+			if(di.DamageDirection.magnitude > 0.0001f) {
+				dir = di.DamageDirection;
+			}
+			else {
+				// No direction for damage set, so we'll assume we have exploded ourself
+				dir = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized;
+			}
+			// Give the body part some force so it flies!
+			part.GetComponent<Rigidbody2D>().AddForce(dir * 20f, ForceMode2D.Impulse);
+			// And make it spin a little
+			part.GetComponent<Rigidbody2D>().AddTorque(Random.Range(-0.2f, 0.2f), ForceMode2D.Impulse);
+		}
 	}
 }

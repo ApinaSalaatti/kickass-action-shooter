@@ -15,7 +15,8 @@ public class Room : MonoBehaviour {
 	private Door[] doors; // All doors leading in and out of the room
 	public Door[] Doors { get { return doors; } }
 
-	private EnemySpawner spawner;
+	[SerializeField]
+	private EnemySpawner[] spawners;
 
 	private bool started = false; // Has the action in this room started?
 	public bool Started { get { return started; } }
@@ -23,13 +24,24 @@ public class Room : MonoBehaviour {
 	private bool cleared = false; // Has the action in this room ended?
 	public bool Cleared { get { return cleared; } }
 
+	// This is true when every spawner has completed it's spawning queue
+	public bool SpawnersDone {
+		get {
+			foreach(EnemySpawner es in spawners) {
+				if(!es.Done) return false;
+			}
+			return true;
+		}
+	}
+
 	void Awake() {
-		spawner = GetComponent<EnemySpawner>();
+		//spawner = GetComponent<EnemySpawner>();
 	}
 
 	void Update () {
 		if(started && !cleared) {
-			if(spawner.Empty) { // Every room ends when the spawner has been emptied (i.e. every enemy is dead!)
+			//Debug.Log("ENEMIES LEFT: " + GameApplication.WorldState.Enemies.Count);
+			if(SpawnersDone && GameApplication.WorldState.Enemies.Count == 0) { // Every room ends when the spawners are done and there are no enemies left
 				StartCoroutine(EndRoom());
 			}
 		}
@@ -50,10 +62,12 @@ public class Room : MonoBehaviour {
 		Debug.Log(gameObject.name + " doors opened");
 	}
 
-	// Starts the attached enemy spawner. Is called at the start of the room.
+	// Starts the attached enemy spawners. Is called at the start of the room.
 	private void StartEnemySpawner() {
-		Debug.Log(gameObject.name + " enemyspawner starting...");
-		spawner.StartSpawner();
+		Debug.Log(gameObject.name + " enemyspawners starting...");
+		foreach(EnemySpawner es in spawners) {
+			es.StartSpawner();
+		}
 	}
 
 	// A coroutine that is run when the room is done. Opens the doors to the next rooms.

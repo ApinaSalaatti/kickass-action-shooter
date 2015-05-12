@@ -21,6 +21,7 @@ public class GameEvent {
 	public static int ROOM_STARTING = 6;
 	public static int PLAYER_SCORED = 7;
 	public static int PLAYER_HIT = 8;
+	public static int ENEMY_SPAWNED = 9;
 
 	private int gameEventType;
 	public int GameEventType {

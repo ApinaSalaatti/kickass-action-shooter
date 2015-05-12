@@ -59,7 +59,10 @@ public class Steering : MonoBehaviour {
 		}
 		
 		// TODO: Should calculate some cool stuff based on the speed of the target!
-		return new Vector2(ParentAI.Perception.DirectionToPlayer.x, ParentAI.Perception.DirectionToPlayer.y);
+		//return new Vector2(ParentAI.Perception.DirectionToPlayer.x, ParentAI.Perception.DirectionToPlayer.y);
+
+		Vector3 toTarget = PursuitTarget.position - transform.position;
+		return new Vector2(toTarget.x, toTarget.y).normalized;
 	}
 	
 	// A method that tries to figure out if we are about to bump into something and give us a direction to avoid the collision

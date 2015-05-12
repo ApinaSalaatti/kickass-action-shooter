@@ -1,0 +1,198 @@
+fileFormatVersion: 2
+guid: 5ab431c6f7f5b414e9f06de691a3361b
+timeCreated: 1431348744
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: raajoja_0
+    21300002: raajoja_1
+    21300004: raajoja_2
+    21300006: raajoja_3
+    21300008: raajoja_4
+    21300010: raajoja_5
+    21300012: raajoja_6
+    21300014: raajoja_7
+    21300016: raajoja_8
+    21300018: raajoja_9
+    21300020: raajoja_10
+    21300022: raajoja_11
+    21300024: raajoja_12
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 450
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: raajoja_0
+      rect:
+        serializedVersion: 2
+        x: 139
+        y: 700
+        width: 50
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: raajoja_1
+      rect:
+        serializedVersion: 2
+        x: 323
+        y: 706
+        width: 156
+        height: 147
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: raajoja_2
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 497
+        width: 59
+        height: 112
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: raajoja_3
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 568
+        width: 103
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: raajoja_4
+      rect:
+        serializedVersion: 2
+        x: 504
+        y: 524
+        width: 80
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: raajoja_5
+      rect:
+        serializedVersion: 2
+        x: 304
+        y: 419
+        width: 61
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: raajoja_6
+      rect:
+        serializedVersion: 2
+        x: 535
+        y: 385
+        width: 49
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: raajoja_7
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 281
+        width: 222
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: raajoja_8
+      rect:
+        serializedVersion: 2
+        x: 312
+        y: 207
+        width: 57
+        height: 130
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: raajoja_9
+      rect:
+        serializedVersion: 2
+        x: 461
+        y: 61
+        width: 124
+        height: 261
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: raajoja_10
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 173
+        width: 22
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: raajoja_11
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 101
+        width: 58
+        height: 46
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: raajoja_12
+      rect:
+        serializedVersion: 2
+        x: 395
+        y: 73
+        width: 31
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
