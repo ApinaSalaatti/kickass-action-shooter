@@ -6,6 +6,9 @@ using System.Collections.Generic;
 public class WorldState : MonoBehaviour, IGameEventListener {
 	[SerializeField]
 	private GameObject player;
+	[SerializeField]
+	private GameObject gameOverScreen;
+
 	public GameObject Player {
 		get { return player; }
 	}
@@ -75,6 +78,7 @@ public class WorldState : MonoBehaviour, IGameEventListener {
 		}
 		else if(e.GameEventType == GameEvent.PLAYER_DEAD) {
 			player = null;
+			gameOverScreen.GetComponent<Animator>().SetBool("Open", true);
 		}
 		else if(e.GameEventType == GameEvent.ENEMY_SPAWNED) {
 			enemies.Add(e.GameEventData as GameObject);
