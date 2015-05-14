@@ -23,6 +23,8 @@ public abstract class State : MonoBehaviour {
 	}
 	*/
 
+	// Called always the state is entered
+	public abstract void OnEnter();
 	// Update returns the state that the AI should change to (if it's the same as the current state, we should do nothing!)
 	public abstract AIStateType UpdateState();
 }

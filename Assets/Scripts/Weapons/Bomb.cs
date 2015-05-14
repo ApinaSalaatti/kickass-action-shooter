@@ -34,8 +34,9 @@ public class Bomb : MonoBehaviour {
 		Instantiate(particleEffect, transform.position, Quaternion.identity);
 
 		// Create a neato crater with a random rotation
-		Instantiate(craterPrefab, transform.position, Quaternion.Euler(0f, 0f, Random.Range(0, 360f)));
-		
+		GameObject c = Instantiate(craterPrefab, transform.position, Quaternion.Euler(0f, 0f, Random.Range(0, 360f))) as GameObject;
+		GameApplication.EventManager.QueueEvent(GameEvent.EFFECT_OBJECT_CREATED, c);
+
 		// Make the screen SHAKE
 		CameraEffects.StartShake(0.5f, 0.1f);
 

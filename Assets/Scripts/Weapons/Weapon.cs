@@ -24,8 +24,11 @@ public class Weapon : MonoBehaviour {
 	public bool Firing {
 		get; set;
 	}
+	[SerializeField]
+	private Vector2 aimTowards = new Vector2();
 	public Vector2 AimTowards {
-		get; set;
+		get { return aimTowards; }
+		set { aimTowards = value; }
 	}
 	
 	private float fireTimer;
@@ -72,12 +75,13 @@ public class Weapon : MonoBehaviour {
 			Vector2 shellForce = new Vector2(-aim.y, aim.x);
 			shell.GetComponent<Rigidbody2D>().AddForce(shellForce * Random.Range(1f, 2f), ForceMode2D.Impulse);
 			shell.GetComponent<Rigidbody2D>().AddTorque(Random.Range(-5f, 5f), ForceMode2D.Impulse);
+			GameApplication.EventManager.QueueEvent(GameEvent.EFFECT_OBJECT_CREATED, shell);
 		}
 
 		GameApplication.EventManager.QueueEvent(GameEvent.BULLET_CREATED, b);
 
 		// Display muzzle flash
-		muzzleFlash.Show();
+		if(muzzleFlash != null) muzzleFlash.Show();
 		// Play sound
 		GameApplication.AudioPlayer.PlaySound(soundFX);
 	}

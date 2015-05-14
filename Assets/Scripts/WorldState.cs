@@ -30,12 +30,17 @@ public class WorldState : MonoBehaviour, IGameEventListener {
 		get { return pickupCreator; }
 	}
 
+	// All created special effects (blood, craters, bullet shells, etc) are saved to this list so when there's too many of them, some can be removed
+	private List<GameObject> specialEffects;
+
 	// Use this for initialization
 	void Awake() {
 		bullets = new List<GameObject>();
 		enemies = new List<GameObject>();
 
 		pickupCreator = GetComponent<PickupCreator>();
+
+		specialEffects = new List<GameObject>();
 	}
 
 	void Start() {
@@ -44,11 +49,21 @@ public class WorldState : MonoBehaviour, IGameEventListener {
 		GameApplication.EventManager.RegisterListener(GameEvent.PLAYER_DEAD, this);
 		GameApplication.EventManager.RegisterListener(GameEvent.ENEMY_SPAWNED, this);
 		GameApplication.EventManager.RegisterListener(GameEvent.ENEMY_DEAD, this);
+		GameApplication.EventManager.RegisterListener(GameEvent.EFFECT_OBJECT_CREATED, this);
 	}
 	
 	// Update is called once per frame
 	void Update () {
 	
+	}
+
+	private void AddEffectObject(GameObject e) {
+		specialEffects.Add(e);
+		if(specialEffects.Count > 1000) {
+			// Too many objects, destroy the oldest
+			Destroy(specialEffects[0]);
+			specialEffects.RemoveAt(0);
+		}
 	}
 
 	public void ReceiveEvent(GameEvent e) {
@@ -66,6 +81,9 @@ public class WorldState : MonoBehaviour, IGameEventListener {
 		}
 		else if(e.GameEventType == GameEvent.ENEMY_DEAD) {
 			enemies.Remove(e.GameEventData as GameObject);
+		}
+		else if(e.GameEventType == GameEvent.EFFECT_OBJECT_CREATED) {
+			AddEffectObject(e.GameEventData as GameObject);
 		}
 	}
 }

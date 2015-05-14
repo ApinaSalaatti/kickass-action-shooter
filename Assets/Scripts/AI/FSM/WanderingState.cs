@@ -8,6 +8,11 @@ public class WanderingState : State {
 	void Awake() {
 		StateType = AIStateType.WANDERING;
 	}
+
+	public override void OnEnter ()
+	{
+
+	}
 	
 	public override AIStateType UpdateState ()
 	{

@@ -7,6 +7,11 @@ public class SpawningState : State {
 	void Awake() {
 		StateType = AIStateType.SPAWNING;
 	}
+
+	public override void OnEnter ()
+	{
+		
+	}
 	
 	public override AIStateType UpdateState ()
 	{

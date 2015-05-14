@@ -7,6 +7,11 @@ public class AttackingState : State {
 		StateType = AIStateType.ATTACKING;
 	}
 
+	public override void OnEnter ()
+	{
+		
+	}
+
 	public override AIStateType UpdateState ()
 	{
 		if(ParentAI.Perception.PlayerDead) {

@@ -10,6 +10,11 @@ public class ExplodingState : State {
 	void Awake() {
 		StateType = AIStateType.ATTACKING;
 	}
+
+	public override void OnEnter ()
+	{
+		
+	}
 	
 	public override AIStateType UpdateState ()
 	{

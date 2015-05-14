@@ -8,6 +8,11 @@ public class SearchingState : State {
 		StateType = AIStateType.SEARCHING;
 	}
 
+	public override void OnEnter ()
+	{
+		ParentAI.LookAtPlayer = true;
+	}
+
 	public override AIStateType UpdateState ()
 	{
 		if(ParentAI.Perception.PlayerDead) {

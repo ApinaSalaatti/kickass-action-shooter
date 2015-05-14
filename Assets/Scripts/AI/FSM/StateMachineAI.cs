@@ -43,9 +43,16 @@ public class StateMachineAI : MonoBehaviour {
 		get { return mover; }
 	}
 
+	public bool SteeringOn {
+		get; set;
+	}
 	private Steering steering;
 	public Steering EntitySteering {
 		get { return steering; }
+	}
+
+	public bool LookAtPlayer {
+		get; set;
 	}
 
 	// If the AI is closer than this distance, it will use its attack (shoot or explode or whatever)
@@ -61,6 +68,9 @@ public class StateMachineAI : MonoBehaviour {
 		attackingState.ParentAI = this;
 		searchingState.ParentAI = this;
 		wanderingState.ParentAI = this;
+
+		// By default, steering is always on
+		SteeringOn = true;
 	}
 
 	// Use this for initialization
@@ -81,10 +91,10 @@ public class StateMachineAI : MonoBehaviour {
 			ChangeState(s);
 		}
 
-		Mover.Velocity = steering.CalculateDirection() * Mover.MaxSpeed;
+		if(SteeringOn) Mover.Velocity = steering.CalculateDirection() * Mover.MaxSpeed;
 
-		// All the enemies just face the player all the time
-		if(!perception.PlayerDead) {
+
+		if(!perception.PlayerDead && LookAtPlayer) {
 			Vector3 dir = GameApplication.WorldState.Player.transform.position - transform.position;
 			float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90;
 			Vector3 rotationVector = new Vector3 (0, 0, angle);
@@ -106,5 +116,7 @@ public class StateMachineAI : MonoBehaviour {
 			currentState = wanderingState;
 			break;
 		}
+
+		currentState.OnEnter();
 	}
 }

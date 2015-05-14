@@ -65,7 +65,7 @@ public class AbilityManager : MonoBehaviour, IGameEventListener {
 
 	public void ReceiveEvent(GameEvent e) {
 		if(e.GameEventType == GameEvent.ENEMY_DEAD) {
-			Power += killPowerValue;
+			//Power += killPowerValue;
 		}
 	}
 }

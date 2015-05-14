@@ -43,11 +43,8 @@ public class PlayerInputManager : MonoBehaviour, IGameEventListener {
 	}
 
 	private void IntroUpdate() {
-		Debug.Log("INTRRROOOOOO");
 		if(Input.GetButtonDown("Skip Text")) {
-			Debug.Log("AAAA");
 			if(story.FastForward()) {
-				Debug.Log("OOHODFKHODKO");
 				CloseIntro();
 			}
 		}

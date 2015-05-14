@@ -46,11 +46,9 @@ public class StoryScreen : MonoBehaviour {
 	// Returns true if all text is already shown
 	public bool FastForward() {
 		if(shownStory.Length == story.Length) {
-			Debug.Log("NOTHING TO FAST FORWARD");
 			return true;
 		}
 		else {
-			Debug.Log("FAST FORWARDED");
 			shownStory = story;
 			storyText.text = shownStory;
 			return false;

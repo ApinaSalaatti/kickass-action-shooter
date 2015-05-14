@@ -42,7 +42,9 @@ public class BloodSpiller : MonoBehaviour {
 			pos.x += Random.Range(-0.2f, 0.2f);
 			pos.y += Random.Range(-0.2f, 0.2f);
 
-			Instantiate(bloodPrefab, pos, q);
+			GameObject b = Instantiate(bloodPrefab, pos, q) as GameObject;
+
+			GameApplication.EventManager.QueueEvent(GameEvent.EFFECT_OBJECT_CREATED, b);
 		}
 	}
 
@@ -64,6 +66,8 @@ public class BloodSpiller : MonoBehaviour {
 		GameObject c = Instantiate(corpsePrefab, transform.position+new Vector3(di.DamageDirection.x/3f, di.DamageDirection.y/3f, 0f), q) as GameObject;
 		// Make the corpse fly backwards
 		c.GetComponent<Rigidbody2D>().AddForce(di.DamageDirection*2f, ForceMode2D.Impulse);
+
+		GameApplication.EventManager.QueueEvent(GameEvent.EFFECT_OBJECT_CREATED, c);
 	}
 
 	private void ThrowBodyParts(DamageInfo di) {
@@ -84,6 +88,8 @@ public class BloodSpiller : MonoBehaviour {
 			part.GetComponent<Rigidbody2D>().AddForce(dir * 20f, ForceMode2D.Impulse);
 			// And make it spin a little
 			part.GetComponent<Rigidbody2D>().AddTorque(Random.Range(-0.2f, 0.2f), ForceMode2D.Impulse);
+
+			GameApplication.EventManager.QueueEvent(GameEvent.EFFECT_OBJECT_CREATED, part);
 		}
 	}
 }

@@ -24,6 +24,7 @@ public class GameEvent {
 	public static int ENEMY_SPAWNED = 9;
 	public static int WAVE_STARTING = 10;
 	public static int WAVE_CLEARED = 11;
+	public static int EFFECT_OBJECT_CREATED = 12;
 
 	private int gameEventType;
 	public int GameEventType {
