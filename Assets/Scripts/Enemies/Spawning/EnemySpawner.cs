@@ -1,11 +1,25 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EnemySpawner : MonoBehaviour, IGameEventListener {
+public class EnemySpawner : MonoBehaviour {
 	[SerializeField]
 	private SpawnEvent[] spawnQueue;
+	public void SetSpawnQueue(SpawnEvent[] queue) {
+		// Do a deep copy of the queue
+		spawnQueue = new SpawnEvent[queue.Length];
+		for(int i = 0; i < spawnQueue.Length; i++) {
+			spawnQueue[i] = new SpawnEvent();
+			spawnQueue[i].SpawnType = queue[i].SpawnType;
+			spawnQueue[i].LengthInSeconds = queue[i].LengthInSeconds;
+			spawnQueue[i].EnemyPrefab = queue[i].EnemyPrefab;
+			spawnQueue[i].AmountToSpawn = queue[i].AmountToSpawn;
+		}
+	}
+
 	[SerializeField]
 	private Transform outOfElevatorPosition; // Given to the spawned AIs so they can get out of the elevator
+	[SerializeField]
+	private GameObject door;
 
 	private bool started = false;
 	private int spawnIndex = -1; // Which spawn event are we currently handling
@@ -21,6 +35,11 @@ public class EnemySpawner : MonoBehaviour, IGameEventListener {
 	}
 	public void StopSpawner() {
 		started = false;
+		spawnIndex = -1;
+	}
+	public void RestartSpawner() {
+		StopSpawner();
+		StartSpawner();
 	}
 
 	void Update() {
@@ -51,87 +70,18 @@ public class EnemySpawner : MonoBehaviour, IGameEventListener {
 		if(spawnIndex < spawnQueue.Length) {
 			spawnQueue[spawnIndex].OnStart();
 			if(spawnQueue[spawnIndex].SpawnType == SpawnEvent.SpawnEventType.SPAWN) {
-				GetComponent<Animator>().SetBool("Spawning", true);
+				// If we get here a spawning event is about to start
+				StartCoroutine(StartSpawning(true));
 				return;
 			}
 		}
-		GetComponent<Animator>().SetBool("Spawning", false);
+		// If we get here, there's nothing to spawn
+		StartCoroutine(StartSpawning(false));
 	}
 
-	/*
-	// Returns true if we have spawned all the enemies and they are all dead
-	public bool Empty {
-		get { return amountOfEnemiesToSpawn == 0 && enemiesLeftAlive == 0; }
-	}
-
-	// Use this for initialization
-	void OnEnable() {
-		GameApplication.EventManager.RegisterListener(GameEvent.ENEMY_DEAD, this);
-	}
-	void OnDisable() {
-		GameApplication.EventManager.RemoveListener(GameEvent.ENEMY_DEAD, this);
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		if(!started) {
-			return;
-		}
-
-		spawnTimer += Time.deltaTime;
-		if(spawnTimer >= 1f) {
-			spawnTimer = 0f;
-			SpawnEnemy();
-		}
-	}
-
-	public void StartSpawner() {
-		started = true;
-	}
-	public void StopSpawner() {
-		started = false;
-	}
-
-	private void SpawnEnemy() {
-		//Vector2 direction = Random.insideUnitCircle;
-		//direction = direction.normalized;
-		//direction = direction * 10f;
-		//Vector3 pos = new Vector3(transform.position.x+direction.x, transform.position.y+direction.y, 0);
-		Vector3 pos = SelectRandomSpawnPoint();
-		GameObject e = CreateRandomEnemy(pos);
-		//GameObject e = Instantiate(enemyPrefab, pos, Quaternion.identity) as GameObject;
-		SetRandomWeapon(e);
-
-		amountOfEnemiesToSpawn--;
-		enemiesLeftAlive++;
-		if(amountOfEnemiesToSpawn == 0) {
-			StopSpawner();
-		}
-	}
-
-	private GameObject CreateRandomEnemy(Vector3 pos) {
-		int r = Random.Range(0, enemyPrefabs.Length);
-		return Instantiate(enemyPrefabs[r], pos, Quaternion.identity) as GameObject;
-	}
-
-	private Vector3 SelectRandomSpawnPoint() {
-		int r = Random.Range(0, spawnPoints.Length);
-		return spawnPoints[r].position;
-	}
-
-	private void SetRandomWeapon(GameObject enemy) {
-		WeaponManager wm = enemy.GetComponent<WeaponManager>();
-		if(wm != null) {
-			int r = Random.Range(0, weaponPrefabs.Length);
-			GameObject w = Instantiate(weaponPrefabs[r]) as GameObject;
-			wm.SetWeapon(w.GetComponent<Weapon>());
-		}
-	}
-	*/
-
-	public void ReceiveEvent(GameEvent e) {
-		//if(e.GameEventType == GameEvent.ENEMY_DEAD) {
-		//	enemiesLeftAlive--;
-		//}
+	private IEnumerator StartSpawning(bool start) {
+		GetComponent<Animator>().SetBool("Spawning", start);
+		yield return new WaitForSeconds(1f); // Wait for the door animation to play
+		door.SetActive(!start);
 	}
 }

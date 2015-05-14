@@ -41,6 +41,9 @@ public class ExplosiveObject : MonoBehaviour {
 		// Make the screen SHAKE
 		CameraEffects.StartShake(0.5f, 0.1f);
 
+		// Play sound
+		GameApplication.AudioPlayer.PlaySound("explosion");
+
 		// Find who we hit and HURT them
 		Collider2D[] cols = Physics2D.OverlapCircleAll(transform.position, explosionRange);
 		foreach(Collider2D col in cols) {

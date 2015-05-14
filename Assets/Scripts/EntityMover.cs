@@ -11,8 +11,11 @@ public class EntityMover : MonoBehaviour {
 	}
 
 	// This will be set elsewhere (by player input or an AI)
+	[SerializeField]
+	private Vector2 velocity = new Vector2();
 	public Vector2 Velocity {
-		get; set;
+		get { return velocity; }
+		set { velocity = value; }
 	}
 
 	private new Rigidbody2D rigidbody; // NOTE TO SELF: The 'new' keyword means this variable hides an inherited member variable
@@ -22,7 +25,17 @@ public class EntityMover : MonoBehaviour {
 	void Awake() {
 		rigidbody = GetComponent<Rigidbody2D>();
 		animator = GetComponent<Animator>();
-		Velocity = new Vector2(0f, 0f);
+
+		if(animator != null) {
+			// Check if the Speed parameter is present. If not, we discard the reference
+			// TODO: shoud probably just make some master Animator controller controller that handles sending parameters to the Animator
+			foreach(AnimatorControllerParameter a in animator.parameters) {
+				if(a.name == "Speed")
+					return;
+			}
+			// No Speed parameter found
+			animator = null;
+		}
 	}
 	
 	// Update is called once per frame

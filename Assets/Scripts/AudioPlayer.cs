@@ -32,11 +32,13 @@ public class AudioPlayer : MonoBehaviour {
 	// Use this for initialization
 	void Awake() {
 		musicSource = (Instantiate(audioSourcePrefab) as GameObject).GetComponent<AudioSource>();
+		musicSource.loop = true;
 
 		// Create a number of AudioSources. The number governs the number of sounds effects that can play at the same time
 		soundSources = new AudioSource[amountOfSimultaneousSounds];
 		for(int i = 0; i < amountOfSimultaneousSounds; i++) {
 			soundSources[i] = (Instantiate(audioSourcePrefab) as GameObject).GetComponent<AudioSource>();
+			soundSources[i].loop = false;
 		}
 	}
 	
@@ -54,18 +56,24 @@ public class AudioPlayer : MonoBehaviour {
 		return null;
 	}
 	private AudioClip FindSound(string n) {
+		//Debug.Log("Looking for sound " + n);
 		foreach(AudioLookupTableEntry a in soundClips) {
-			if(a.name == n)
+			if(a.name == n) {
+				//Debug.Log("Found sound " + n);
 				return a.clip;
+			}
 		}
 		
 		return null;
 	}
 
 	private AudioSource GetFreeSoundSource() {
+		//Debug.Log("Trying to find free sound source");
 		foreach(AudioSource a in soundSources) {
-			if(!a.isPlaying)
+			if(!a.isPlaying) {
+				//Debug.Log("Sound source found!");
 				return a;
+			}
 		}
 		return null;
 	}
@@ -78,12 +86,13 @@ public class AudioPlayer : MonoBehaviour {
 			musicSource.Play();
 		}
 	}
-	public void PlaySound(string name, ulong delay = 0) {
+	public void PlaySound(string name, float volume = 1f, ulong delay = 0) {
 		AudioSource a = GetFreeSoundSource();
 		if(a != null) {
 			AudioClip ac = FindSound(name);
 			if(ac != null) {
 				a.clip = ac;
+				a.volume = volume;
 				a.Play(delay);
 			}
 		}

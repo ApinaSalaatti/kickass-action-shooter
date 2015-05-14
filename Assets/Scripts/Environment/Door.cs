@@ -8,9 +8,11 @@ public class Door : MonoBehaviour {
 		get { return locked; }
 	}
 
+	private Animator animator;
+
 	// Use this for initialization
 	void Start () {
-	
+		animator = GetComponent<Animator>();
 	}
 	
 	// Update is called once per frame
@@ -21,13 +23,13 @@ public class Door : MonoBehaviour {
 	// Open the door (if not locked)
 	public void Open() {
 		if(!locked) {
-			gameObject.SetActive(false);
+			animator.SetBool("Open", true);
 		}
 	}
 
 	// Close the door
 	public void Close() {
-		gameObject.SetActive(true);
+		animator.SetBool("Open", false);
 	}
 
 	// Sets the locked status of the door to the given parameter

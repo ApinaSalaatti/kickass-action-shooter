@@ -25,7 +25,7 @@ public class AttackingState : State {
 		ParentAI.EntitySteering.ObjectAvoidanceOn = false;
 
 		// If we are very close we don't need to move anymore
-		if(ParentAI.Perception.DistanceFromPlayer < 2f) {
+		if(ParentAI.Perception.DistanceFromPlayer < ParentAI.AttackDistance / 2f) {
 			ParentAI.EntitySteering.PursuitOn = false;
 		}
 		else {

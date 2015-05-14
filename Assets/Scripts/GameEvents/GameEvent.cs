@@ -22,6 +22,8 @@ public class GameEvent {
 	public static int PLAYER_SCORED = 7;
 	public static int PLAYER_HIT = 8;
 	public static int ENEMY_SPAWNED = 9;
+	public static int WAVE_STARTING = 10;
+	public static int WAVE_CLEARED = 11;
 
 	private int gameEventType;
 	public int GameEventType {

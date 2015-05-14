@@ -1,0 +1,202 @@
+fileFormatVersion: 2
+guid: 6b0e19b1e36099648a95bdb0e5e57595
+timeCreated: 1431615481
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: vertamenuun_0
+    21300002: vertamenuun_1
+    21300004: vertamenuun_2
+    21300006: vertamenuun_3
+    21300008: vertamenuun_4
+    21300010: vertamenuun_5
+    21300012: vertamenuun_6
+    21300014: vertamenuun_7
+    21300016: vertamenuun_8
+    21300018: vertamenuun_9
+    21300020: vertamenuun_10
+    21300022: vertamenuun_11
+    21300024: vertamenuun_12
+    21300026: vertamenuun_13
+    21300028: vertamenuun_14
+    21300030: vertamenuun_15
+    21300032: vertamenuun_16
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 200
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: vertamenuun_0
+      rect:
+        serializedVersion: 2
+        x: 488
+        y: 321
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: vertamenuun_1
+      rect:
+        serializedVersion: 2
+        x: 501
+        y: 277
+        width: 5
+        height: 4
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: vertamenuun_3
+      rect:
+        serializedVersion: 2
+        x: 2396
+        y: 75
+        width: 55
+        height: 213
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 1, y: 100, z: 1, w: 70}
+    - name: vertamenuun_4
+      rect:
+        serializedVersion: 2
+        x: 2538
+        y: 111
+        width: 43
+        height: 178
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 1, y: 80, z: 1, w: 70}
+    - name: vertamenuun_7
+      rect:
+        serializedVersion: 2
+        x: 221
+        y: 114
+        width: 33
+        height: 127
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 1, y: 76, z: 1, w: 40}
+    - name: vertamenuun_8
+      rect:
+        serializedVersion: 2
+        x: 381
+        y: 113
+        width: 41
+        height: 129
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 1, y: 81, z: 1, w: 25}
+    - name: vertamenuun_9
+      rect:
+        serializedVersion: 2
+        x: 980
+        y: 110
+        width: 26
+        height: 114
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 1, y: 70, z: 1, w: 30}
+    - name: vertamenuun_10
+      rect:
+        serializedVersion: 2
+        x: 1228
+        y: 130
+        width: 34
+        height: 131
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 1, y: 80, z: 1, w: 30}
+    - name: vertamenuun_12
+      rect:
+        serializedVersion: 2
+        x: 1472
+        y: 103
+        width: 40
+        height: 159
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 1, y: 80, z: 1, w: 40}
+    - name: vertamenuun_13
+      rect:
+        serializedVersion: 2
+        x: 1545
+        y: 108
+        width: 25
+        height: 158
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 1, y: 80, z: 1, w: 50}
+    - name: vertamenuun_14
+      rect:
+        serializedVersion: 2
+        x: 1699
+        y: 65
+        width: 30
+        height: 209
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 1, y: 120, z: 1, w: 40}
+    - name: vertamenuun_15
+      rect:
+        serializedVersion: 2
+        x: 1820
+        y: 111
+        width: 47
+        height: 158
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 1, y: 74, z: 1, w: 50}
+    - name: vertamenuun_16
+      rect:
+        serializedVersion: 2
+        x: 1953
+        y: 131
+        width: 20
+        height: 143
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 1, y: 80, z: 1, w: 40}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

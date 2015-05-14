@@ -16,6 +16,9 @@ public class Weapon : MonoBehaviour {
 	private GameObject bulletPrefab;
 	[SerializeField]
 	private GameObject shellPrefab;
+
+	[SerializeField]
+	private string soundFX;
 	
 	// These will always be set from outside, i.e. by AI or player input
 	public bool Firing {
@@ -57,16 +60,25 @@ public class Weapon : MonoBehaviour {
 		aim = aim.normalized;
 		EntityMover bulletMover = b.GetComponent<EntityMover>();
 		bulletMover.Velocity = aim * bulletMover.MaxSpeed;
+
+		// Make the bullet object face the right way
+		float angle = Mathf.Atan2(aim.y, aim.x) * Mathf.Rad2Deg;
+		Quaternion q = Quaternion.Euler(0f, 0f, angle -90f);
+		b.transform.rotation = q;
 		
 		// Create a shell object
-		GameObject shell = Instantiate(shellPrefab, transform.position, Quaternion.identity) as GameObject;
-		Vector2 shellForce = new Vector2(-aim.y, aim.x);
-		shell.GetComponent<Rigidbody2D>().AddForce(shellForce * Random.Range(1f, 2f), ForceMode2D.Impulse);
-		shell.GetComponent<Rigidbody2D>().AddTorque(Random.Range(-5f, 5f), ForceMode2D.Impulse);
-		
+		if(shellPrefab != null) {
+			GameObject shell = Instantiate(shellPrefab, transform.position, Quaternion.identity) as GameObject;
+			Vector2 shellForce = new Vector2(-aim.y, aim.x);
+			shell.GetComponent<Rigidbody2D>().AddForce(shellForce * Random.Range(1f, 2f), ForceMode2D.Impulse);
+			shell.GetComponent<Rigidbody2D>().AddTorque(Random.Range(-5f, 5f), ForceMode2D.Impulse);
+		}
+
 		GameApplication.EventManager.QueueEvent(GameEvent.BULLET_CREATED, b);
 
 		// Display muzzle flash
 		muzzleFlash.Show();
+		// Play sound
+		GameApplication.AudioPlayer.PlaySound(soundFX);
 	}
 }

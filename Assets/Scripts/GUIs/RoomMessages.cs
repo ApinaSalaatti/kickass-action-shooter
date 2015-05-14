@@ -10,6 +10,8 @@ public class RoomMessages : MonoBehaviour, IGameEventListener {
 	void Start () {
 		GameApplication.EventManager.RegisterListener(GameEvent.ROOM_CLEARED, this);
 		GameApplication.EventManager.RegisterListener(GameEvent.ROOM_STARTING, this);
+		GameApplication.EventManager.RegisterListener(GameEvent.WAVE_CLEARED, this);
+		GameApplication.EventManager.RegisterListener(GameEvent.WAVE_STARTING, this);
 	}
 	
 	// Update is called once per frame
@@ -22,6 +24,12 @@ public class RoomMessages : MonoBehaviour, IGameEventListener {
 			StartCoroutine(ShowMessage((e.GameEventData as Room).name + " cleared!", 5f));
 		}
 		else if(e.GameEventType == GameEvent.ROOM_STARTING) {
+			StartCoroutine(ShowCountdown(5));
+		}
+		else if(e.GameEventType == GameEvent.WAVE_CLEARED) {
+			StartCoroutine(ShowMessage("Wave " + (int)e.GameEventData + " cleared!", 5f));
+		}
+		else if(e.GameEventType == GameEvent.WAVE_STARTING) {
 			StartCoroutine(ShowCountdown(5));
 		}
 	}

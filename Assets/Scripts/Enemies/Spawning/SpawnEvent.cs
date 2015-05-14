@@ -6,17 +6,30 @@ using System.Collections;
 public class SpawnEvent {
 	[SerializeField]
 	private GameObject enemyPrefab;
+	public GameObject EnemyPrefab {
+		get { return enemyPrefab; }
+		set { enemyPrefab = value; }
+	}
 
 	[SerializeField]
 	private int amountToSpawn;
+	public int AmountToSpawn {
+		get { return amountToSpawn; }
+		set { amountToSpawn = value; }
+	}
 	[SerializeField]
 	private float lengthInSeconds;
+	public float LengthInSeconds {
+		get { return lengthInSeconds; }
+		set { lengthInSeconds = value; }
+	}
 
 	public enum SpawnEventType { SPAWN, WAIT }
 	[SerializeField]
 	private SpawnEventType spawnType;
 	public SpawnEventType SpawnType {
 		get { return spawnType; }
+		set { spawnType = value; }
 	}
 
 	private float timer = 0f;

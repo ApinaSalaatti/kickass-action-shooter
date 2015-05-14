@@ -30,6 +30,8 @@ public class ProjectileShooter : MonoBehaviour {
 	public void FireProjectile() {
 		GameObject proj = Instantiate(projectilePrefab, projectileSpawnPosition.position, transform.rotation) as GameObject;
 		Vector2 dir = new Vector2(transform.right.x, transform.right.y);
-		proj.GetComponent<Rigidbody2D>().AddForce(dir * 10f, ForceMode2D.Impulse);
+		EntityMover em = proj.GetComponent<EntityMover>();
+		em.Velocity = dir * em.MaxSpeed;
+		GameApplication.EventManager.QueueEvent(GameEvent.BULLET_REMOVED, proj);
 	}
 }

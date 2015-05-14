@@ -7,6 +7,8 @@ public class Bomb : MonoBehaviour {
 	[SerializeField]
 	private float explosionRange = 1.5f;
 	[SerializeField]
+	private bool explodeOnImpact;
+	[SerializeField]
 	private GameObject particleEffect;
 	[SerializeField]
 	private GameObject craterPrefab;
@@ -37,6 +39,9 @@ public class Bomb : MonoBehaviour {
 		// Make the screen SHAKE
 		CameraEffects.StartShake(0.5f, 0.1f);
 
+		// Play sound FX
+		GameApplication.AudioPlayer.PlaySound("explosion");
+
 		DamageInfo di = new DamageInfo();
 		// Find who we hit and HURT them
 		Collider2D[] cols = Physics2D.OverlapCircleAll(transform.position, explosionRange);
@@ -64,5 +69,11 @@ public class Bomb : MonoBehaviour {
 		di.DamageType = DamageInfo.DType.EXPLOSION;
 		SendMessage("OnDeath", di, SendMessageOptions.DontRequireReceiver);
 		Destroy(gameObject);
+	}
+
+	void OnCollisionEnter2D(Collision2D col) {
+		if(explodeOnImpact) {
+			Explode();
+		}
 	}
 }

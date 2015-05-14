@@ -35,12 +35,11 @@ public class Room : MonoBehaviour {
 	}
 
 	void Awake() {
-		//spawner = GetComponent<EnemySpawner>();
+
 	}
 
 	void Update () {
 		if(started && !cleared) {
-			//Debug.Log("ENEMIES LEFT: " + GameApplication.WorldState.Enemies.Count);
 			if(SpawnersDone && GameApplication.WorldState.Enemies.Count == 0) { // Every room ends when the spawners are done and there are no enemies left
 				StartCoroutine(EndRoom());
 			}

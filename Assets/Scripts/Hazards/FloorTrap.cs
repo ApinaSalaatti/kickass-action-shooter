@@ -5,10 +5,24 @@ using System.Collections.Generic;
 public class FloorTrap : MonoBehaviour {
 	[SerializeField]
 	private float activationInterval = 5f;
+	public float ActivationInterval {
+		get { return activationInterval; }
+		set { activationInterval = value; }
+	}
+
 	[SerializeField]
 	private float timeActive = 2f;
+	public float TimeActive {
+		get { return timeActive; }
+		set { timeActive = value; }
+	}
+
 	[SerializeField]
 	private float damagePerSecond = 1f;
+	public float DamagePerSecond {
+		get { return damagePerSecond; }
+		set { damagePerSecond = value; }
+	}
 
 	private float timer = 0f;
 	private bool active = false;
