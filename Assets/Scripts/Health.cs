@@ -28,13 +28,14 @@ public class Health : MonoBehaviour {
 	}
 
 	public void GetHealed(float amount) {
-		Debug.Log("Healing for " + amount);
+		//Debug.Log("Healing for " + amount);
 		currentHealth += amount;
 		currentHealth = Mathf.Min(maxHealth, currentHealth);
 		SendMessage("OnHeal", amount, SendMessageOptions.DontRequireReceiver);
 	}
 
 	public void TakeDamage(DamageInfo di) {
+		//Debug.Log(gameObject.name + " IS HURT " + di.DamageAmount);
 		float dmg = di.DamageAmount;
 
 		if(!invincible)

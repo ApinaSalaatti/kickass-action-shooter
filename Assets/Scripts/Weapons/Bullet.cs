@@ -33,6 +33,7 @@ public class Bullet : MonoBehaviour {
 	}
 
 	private void ApplyDamage(GameObject go, Vector2 pos) {
+		//Debug.Log("HURTING " + go.name);
 		di.DamagePosition = pos;
 		di.DamageDirection = GetComponent<EntityMover>().Velocity.normalized;
 		go.SendMessage("TakeDamage", di, SendMessageOptions.DontRequireReceiver);

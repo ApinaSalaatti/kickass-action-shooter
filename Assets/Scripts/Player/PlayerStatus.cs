@@ -69,11 +69,16 @@ public class PlayerStatus : MonoBehaviour {
 
 	void OnDamage() {
 		CameraEffects.StartShake(0.3f, 0.1f);
+		GameApplication.AudioPlayer.PlaySound("playerHurt");
 		ResetMultiplier();
 		GameApplication.EventManager.QueueEvent(GameEvent.PLAYER_HIT, gameObject);
 	}
 
 	void OnDeath() {
 		GameApplication.EventManager.QueueEvent(GameEvent.PLAYER_DEAD, gameObject);
+	}
+
+	void OnHeal() {
+		GameApplication.EventManager.QueueEvent(GameEvent.PLAYER_HEALED, gameObject);
 	}
 }

@@ -56,6 +56,7 @@ public class EndlessRoom : MonoBehaviour {
 		yield return new WaitForSeconds(5f); // Wait for a bit so a countdown can be displayed
 		StartEnemySpawners();
 		waveStarted = true;
+		GameApplication.AudioPlayer.PlaySound("elevatorDing"); // The wave starts and the enemies start pouring out of the elevators and an OMINOUS ding is played
 	}
 	
 	// Closes the door of the room. Is called at the start of the room
@@ -67,8 +68,8 @@ public class EndlessRoom : MonoBehaviour {
 	// Starts the attached enemy spawners. Is called at the start of the room.
 	private void StartEnemySpawners() {
 		Debug.Log(gameObject.name + " enemyspawners starting...");
-		SpawnEvent[] queue = endlessModeManager.CreateSpawnsForWave(currentWave);
 		foreach(EnemySpawner es in spawners) {
+			SpawnEvent[] queue = endlessModeManager.CreateSpawnsForWave(currentWave);
 			es.SetSpawnQueue(queue);
 			es.RestartSpawner();
 		}

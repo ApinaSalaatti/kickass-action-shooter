@@ -86,7 +86,7 @@ public class AudioPlayer : MonoBehaviour {
 			musicSource.Play();
 		}
 	}
-	public void PlaySound(string name, float volume = 1f, ulong delay = 0) {
+	public void PlaySound(string name, float volume = 0.8f, ulong delay = 0) {
 		AudioSource a = GetFreeSoundSource();
 		if(a != null) {
 			AudioClip ac = FindSound(name);

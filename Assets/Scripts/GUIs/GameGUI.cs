@@ -7,6 +7,7 @@ using System.Collections;
 public class GameGUI : MonoBehaviour, IGameEventListener {
 	[SerializeField]
 	private Text healthText;
+
 	[SerializeField]
 	private Text scoreText;
 	[SerializeField]

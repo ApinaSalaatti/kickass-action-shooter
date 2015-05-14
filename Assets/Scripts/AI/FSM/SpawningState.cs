@@ -18,6 +18,9 @@ public class SpawningState : State {
 		float dist = Vector3.Distance(transform.position, ParentAI.SpawnTarget.position);
 		if(dist <= 0.1f) {
 			// Whee, we are out of the elevator!
+			// Set the layer of the enemy (spawning enemies have a special layer so they don't collide with the spawner
+			// Regular enemies WILL collide with the spawner so they can't run back in
+			ParentAI.gameObject.layer = 9;
 			return AIStateType.SEARCHING;
 		}
 

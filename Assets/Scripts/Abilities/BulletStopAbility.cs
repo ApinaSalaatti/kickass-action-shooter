@@ -51,7 +51,7 @@ public class BulletStopAbility : Ability {
 		foreach(StoppedBulletData sbd in affectedBullets) {
 			GameObject bullet = sbd.Bullet;
 			EntityMover em = bullet.GetComponent<EntityMover>();
-			em.Velocity = sbd.OriginalVelocity.normalized * -1f * 15f; // TODO: Just a number I randomly made up, figure out something cool maybe?
+			em.Velocity = sbd.OriginalVelocity.normalized * -1f * 15f; // TODO: 15 is just a number I randomly made up, figure out something cool maybe?
 			bullet.layer = 10; // The bullets become player's bullets, woah!
 		}
 
