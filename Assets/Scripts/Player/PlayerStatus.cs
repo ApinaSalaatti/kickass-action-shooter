@@ -3,11 +3,11 @@ using System.Collections;
 
 // A class that handles all player status changes like dying and scoring
 public class PlayerStatus : MonoBehaviour {
-	private int score = 0;
-	public int Score {
+	private uint score = 0;
+	public uint Score {
 		get { return score; }
 	}
-	public void AddScore(int s, string scoreEventText) {
+	public void AddScore(uint s, string scoreEventText) {
 		GameApplication.EventManager.QueueEvent(GameEvent.PLAYER_SCORED, new PlayerScoredEventData(scoreEventText, s));
 		score += s * multiplier;
 
@@ -38,8 +38,8 @@ public class PlayerStatus : MonoBehaviour {
 	public float TimeLeftUntilMultiplierReset { get { return timeLeftUntilMultiplierReset; } }
 
 
-	private int multiplier = 1;
-	public int Multiplier {
+	private uint multiplier = 1;
+	public uint Multiplier {
 		get { return multiplier; }
 	}
 	public void ResetMultiplier() {
@@ -75,7 +75,9 @@ public class PlayerStatus : MonoBehaviour {
 	}
 
 	void OnDeath() {
+		GameApplication.AudioPlayer.PlaySound("playerDeath", 1f);
 		GameApplication.EventManager.QueueEvent(GameEvent.PLAYER_DEAD, gameObject);
+		gameObject.SetActive(false); // We don't want to destroy the player object as other scripts still might want to access the player's status
 	}
 
 	void OnHeal() {

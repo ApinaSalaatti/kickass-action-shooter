@@ -32,9 +32,9 @@ public class EndlessMode : MonoBehaviour {
 
 	// A very lousy system for randomly generating waves that get harder and harder
 	public SpawnEvent[] CreateSpawnsForWave(int wave) {
-		int baseAmountPerSpawn = 1;// wave * 2;
-		int randomFactor = 0;// Random.Range(0, wave);
-		int spawnEvents = 1;// wave * 3;
+		int baseAmountPerSpawn = wave * 2;
+		int randomFactor = Random.Range(0, wave);
+		int spawnEvents = wave * 3;
 
 		SpawnEvent[] queue = new SpawnEvent[spawnEvents];
 		for(int i = 0; i < queue.Length; i++) {

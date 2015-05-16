@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+// A Component that represents the health of an entity. It's responsible for receiving the TakeDamage event and then informing other components that damage has been received
+// Note that this component does nothing when the health reaches zero, other components must implement destroying the object (or whatever should happen) when they receive the OnDeath event
 public class Health : MonoBehaviour {
 	[SerializeField]
 	private float maxHealth = 10f;
@@ -41,11 +43,10 @@ public class Health : MonoBehaviour {
 		if(!invincible)
 			currentHealth -= dmg;
 
-		// Send messages even when not invincible
+		// Send messages even when invincible
 		SendMessage("OnDamage", di, SendMessageOptions.DontRequireReceiver);
 		if(currentHealth <= 0) {
 			SendMessage("OnDeath", di, SendMessageOptions.DontRequireReceiver);
-			Destroy(gameObject);
 		}
 	}
 }

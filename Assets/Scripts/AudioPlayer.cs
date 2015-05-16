@@ -2,10 +2,16 @@
 using System.Collections.Generic;
 
 // A helper class to attach a name to an AudioClip
+// If multiple audioclips are given, a random one can be chosen with the GiveRandom method
 [System.Serializable]
 public class AudioLookupTableEntry {
 	public string name;
-	public AudioClip clip;
+	public AudioClip[] clips;
+
+	public AudioClip GiveRandom() {
+		int r = Random.Range(0, clips.Length);
+		return clips[r];
+	}
 }
 
 // Helpful methods to play sounds and music. Has global access through the GameApplication class
@@ -50,7 +56,7 @@ public class AudioPlayer : MonoBehaviour {
 	private AudioClip FindMusic(string n) {
 		foreach(AudioLookupTableEntry a in musicTracks) {
 			if(a.name == n)
-				return a.clip;
+				return a.GiveRandom(); // Always select a random clip (if there's only one clip with this name, it is always chosen you see :)
 		}
 
 		return null;
@@ -60,7 +66,7 @@ public class AudioPlayer : MonoBehaviour {
 		foreach(AudioLookupTableEntry a in soundClips) {
 			if(a.name == n) {
 				//Debug.Log("Found sound " + n);
-				return a.clip;
+				return a.GiveRandom(); // See above
 			}
 		}
 		

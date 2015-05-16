@@ -77,8 +77,7 @@ public class WorldState : MonoBehaviour, IGameEventListener {
 			bullets.Remove(e.GameEventData as GameObject);
 		}
 		else if(e.GameEventType == GameEvent.PLAYER_DEAD) {
-			player = null;
-			gameOverScreen.GetComponent<Animator>().SetBool("Open", true);
+			gameOverScreen.GetComponent<GameOverScreen>().ShowScreen();
 		}
 		else if(e.GameEventType == GameEvent.ENEMY_SPAWNED) {
 			enemies.Add(e.GameEventData as GameObject);

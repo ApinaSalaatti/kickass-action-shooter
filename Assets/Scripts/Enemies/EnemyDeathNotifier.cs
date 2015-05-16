@@ -15,6 +15,8 @@ public class EnemyDeathNotifier : MonoBehaviour {
 	}
 
 	void OnDeath() {
+		GameApplication.AudioPlayer.PlaySound("enemyDeath");
 		GameApplication.EventManager.QueueEvent(GameEvent.ENEMY_DEAD, gameObject);
+		Destroy(gameObject);
 	}
 }

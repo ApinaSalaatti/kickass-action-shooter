@@ -30,6 +30,11 @@ public class Weapon : MonoBehaviour {
 		get { return aimTowards; }
 		set { aimTowards = value; }
 	}
+
+	// The owner of this weapon. Used when the weapon is fired to send an event that can contain the bullet and the entity that used the weapon
+	public GameObject Owner {
+		get; set;
+	}
 	
 	private float fireTimer;
 	
@@ -78,7 +83,7 @@ public class Weapon : MonoBehaviour {
 			GameApplication.EventManager.QueueEvent(GameEvent.EFFECT_OBJECT_CREATED, shell);
 		}
 
-		GameApplication.EventManager.QueueEvent(GameEvent.BULLET_CREATED, b);
+		GameApplication.EventManager.QueueEvent(GameEvent.BULLET_CREATED, new BulletCreatedEventData(b, Owner));
 
 		// Display muzzle flash
 		if(muzzleFlash != null) muzzleFlash.Show();

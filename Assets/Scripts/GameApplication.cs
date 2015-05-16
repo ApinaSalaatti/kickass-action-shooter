@@ -7,6 +7,7 @@ public class GameApplication : MonoBehaviour {
 	private static GameEventManager eventManager;
 	private static WorldState worldState;
 	private static AudioPlayer audioPlayer;
+	private static Statistics statistics;
 
 	public static GameEventManager EventManager {
 		get { return eventManager; }
@@ -17,11 +18,15 @@ public class GameApplication : MonoBehaviour {
 	public static AudioPlayer AudioPlayer {
 		get { return audioPlayer; }
 	}
+	public static Statistics Statistics {
+		get { return statistics; }
+	}
 
 	void Awake() {
 		eventManager = GetComponent<GameEventManager>();
 		worldState = GetComponent<WorldState>();
 		audioPlayer = GetComponent<AudioPlayer>();
+		statistics = GetComponent<Statistics>();
 	}
 	
 	// Update is called once per frame
