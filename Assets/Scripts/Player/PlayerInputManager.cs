@@ -7,6 +7,11 @@ public class PlayerInputManager : MonoBehaviour, IGameEventListener {
 	[SerializeField]
 	private GameObject player;
 
+	// A simple flag that is set when using an Xbox controller rather than keyboard and mouse because the aiming is a bit differently handled with the controller
+	public static bool UsingController {
+		get; set;
+	}
+
 	private EntityMover playerMover;
 	private WeaponManager playerWeapons;
 	private AbilityManager playerAbilities;
@@ -58,24 +63,15 @@ public class PlayerInputManager : MonoBehaviour, IGameEventListener {
 		Vector2 movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 		playerMover.Velocity = movement.normalized * playerMover.MaxSpeed; // Player always runs at FULL SPEED
 
-		// Aiming
-		Vector3 mousePos = Input.mousePosition;
-		mousePos = Camera.main.ScreenToWorldPoint(mousePos);
-		Vector2 aim = new Vector2(mousePos.x - player.transform.position.x, mousePos.y - player.transform.position.y);
-		aim = aim.normalized;
-		playerWeapons.AimTowards = aim;
-
-		// Turn player sprite
-		float angle = Mathf.Atan2(aim.y, aim.x) * Mathf.Rad2Deg - 90;
-		player.transform.rotation = Quaternion.Euler(0f, 0f, angle);
+		if(UsingController) {
+			AimAndTurnController();
+		}
+		else {
+			AimAndTurnMouse();
+		}
 
 		// Firing
-		if(Input.GetButtonDown("Fire1")) {
-			playerWeapons.Firing = true;
-		}
-		if(Input.GetButtonUp("Fire1")) {
-			playerWeapons.Firing = false;
-		}
+		HandleFiring();
 		
 		// Abilities
 		if(Input.GetButtonDown("BulletStop")) {
@@ -84,8 +80,56 @@ public class PlayerInputManager : MonoBehaviour, IGameEventListener {
 		if(Input.GetButtonDown("Dash")) {
 			playerAbilities.ActivateDash();
 		}
+	}
 
-		Debug.Log(Input.GetAxis("ControllerLeftX"));
+	private void HandleFiring() {
+		if(UsingController) {
+			float trigger = Input.GetAxisRaw("Fire1");
+			Debug.Log(trigger);
+			if(trigger == -1) { // -1 means the right trigger of the controller
+				playerWeapons.Firing = true;
+			}
+			else {
+				playerWeapons.Firing = false;
+			}
+		}
+		else {
+			if(Input.GetButtonDown("Fire1")) {
+				playerWeapons.Firing = true;
+			}
+			if(Input.GetButtonUp("Fire1")) {
+				playerWeapons.Firing = false;
+			}
+		}
+	}
+
+	private void AimAndTurnMouse() {
+		// Aiming
+		Vector3 mousePos = Input.mousePosition;
+		mousePos = Camera.main.ScreenToWorldPoint(mousePos);
+		Vector2 aim = new Vector2(mousePos.x - player.transform.position.x, mousePos.y - player.transform.position.y);
+		aim = aim.normalized;
+		playerWeapons.AimTowards = aim;
+		
+		// Turn player sprite
+		float angle = Mathf.Atan2(aim.y, aim.x) * Mathf.Rad2Deg - 90;
+		player.transform.rotation = Quaternion.Euler(0f, 0f, angle);
+	}
+	private void AimAndTurnController() {
+		float deltaX = Input.GetAxisRaw("ControllerRightX");
+		float deltaY = -Input.GetAxisRaw("ControllerRightY"); // Controller Y axis seems to be inverted
+		//Debug.Log(deltaX + "," + deltaY);
+
+		// Change only when the right stick is actually turned
+		if(deltaX > 0.01f || deltaY > 0.01f) {
+			Vector2 aim = new Vector2(deltaX, deltaY);
+			aim = aim.normalized;
+			playerWeapons.AimTowards = aim;
+			
+			// Turn player sprite
+			float angle = Mathf.Atan2(aim.y, aim.x) * Mathf.Rad2Deg - 90;
+			player.transform.rotation = Quaternion.Euler(0f, 0f, angle);
+		}
 	}
 
 	public void ReceiveEvent(GameEvent e) {

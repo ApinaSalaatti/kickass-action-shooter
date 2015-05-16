@@ -17,10 +17,12 @@ public class DestroyableObject : MonoBehaviour {
 
 	void TakeDamage(DamageInfo di) {
 		// Spawn the particle effect in the direction of the damage
-		float angle = Mathf.Atan2(di.DamageDirection.y, di.DamageDirection.x) * Mathf.Rad2Deg - 90f; // It seems the particles need to be turned an additional 90 degrees for some reason
-		Quaternion q = Quaternion.Euler(0f, 0f, angle);
-		Instantiate(particleEffect, transform.position, q); // Instantiate the particles, cool!
-		
+		if(particleEffect != null) {
+			float angle = Mathf.Atan2(di.DamageDirection.y, di.DamageDirection.x) * Mathf.Rad2Deg - 90f; // It seems the particles need to be turned an additional 90 degrees for some reason
+			Quaternion q = Quaternion.Euler(0f, 0f, angle);
+			Instantiate(particleEffect, transform.position, q); // Instantiate the particles, cool!
+		}
+
 		// Spawn a random amount of pieces if available
 		if(piecePrefab != null) {
 			int r = Random.Range(5, 11);

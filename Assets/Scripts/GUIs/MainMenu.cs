@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class MainMenu : MonoBehaviour {
@@ -12,6 +13,8 @@ public class MainMenu : MonoBehaviour {
 	private GameObject masters;
 	[SerializeField]
 	private GameObject buttons;
+	[SerializeField]
+	private Toggle controllerToggle;
 
 	// Use this for initialization
 	void Start () {
@@ -24,6 +27,13 @@ public class MainMenu : MonoBehaviour {
 	}
 
 	public void StartGame() {
+		// TODO: Should make this a more proper option that can be changed any time
+		Debug.Log(controllerToggle.isOn);
+		if(controllerToggle.isOn)
+			PlayerInputManager.UsingController = true;
+		else
+			PlayerInputManager.UsingController = false;
+
 		Application.LoadLevel(1);
 	}
 

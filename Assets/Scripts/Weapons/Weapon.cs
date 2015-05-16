@@ -25,7 +25,7 @@ public class Weapon : MonoBehaviour {
 		get; set;
 	}
 	[SerializeField]
-	private Vector2 aimTowards = new Vector2();
+	private Vector2 aimTowards = new Vector2(0f, 1f);
 	public Vector2 AimTowards {
 		get { return aimTowards; }
 		set { aimTowards = value; }
