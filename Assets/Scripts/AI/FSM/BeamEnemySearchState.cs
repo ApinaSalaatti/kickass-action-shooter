@@ -52,7 +52,7 @@ public class BeamEnemySearchState : State {
 			break;
 		}
 
-		int mask = LayerMask.GetMask("Environment");
+		int mask = LayerMask.GetMask("Environment", "Spawner");
 		Vector2 pos = new Vector2(ParentAI.transform.position.x, ParentAI.transform.position.y);
 		RaycastHit2D hit = Physics2D.Raycast(pos, dir, 1f, mask);
 		if(hit.collider != null) {

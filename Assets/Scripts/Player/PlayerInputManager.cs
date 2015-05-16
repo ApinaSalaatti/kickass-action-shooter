@@ -57,14 +57,18 @@ public class PlayerInputManager : MonoBehaviour, IGameEventListener {
 		// Moving
 		Vector2 movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 		playerMover.Velocity = movement.normalized * playerMover.MaxSpeed; // Player always runs at FULL SPEED
-		
+
 		// Aiming
 		Vector3 mousePos = Input.mousePosition;
 		mousePos = Camera.main.ScreenToWorldPoint(mousePos);
 		Vector2 aim = new Vector2(mousePos.x - player.transform.position.x, mousePos.y - player.transform.position.y);
 		aim = aim.normalized;
 		playerWeapons.AimTowards = aim;
-		
+
+		// Turn player sprite
+		float angle = Mathf.Atan2(aim.y, aim.x) * Mathf.Rad2Deg - 90;
+		player.transform.rotation = Quaternion.Euler(0f, 0f, angle);
+
 		// Firing
 		if(Input.GetButtonDown("Fire1")) {
 			playerWeapons.Firing = true;
@@ -80,6 +84,8 @@ public class PlayerInputManager : MonoBehaviour, IGameEventListener {
 		if(Input.GetButtonDown("Dash")) {
 			playerAbilities.ActivateDash();
 		}
+
+		Debug.Log(Input.GetAxis("ControllerLeftX"));
 	}
 
 	public void ReceiveEvent(GameEvent e) {
