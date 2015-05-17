@@ -23,12 +23,13 @@ public class MainMenu : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		if(Input.GetKeyDown(KeyCode.Escape)) {
+			QuitGame();
+		}
 	}
 
 	public void StartGame() {
 		// TODO: Should make this a more proper option that can be changed any time
-		Debug.Log(controllerToggle.isOn);
 		if(controllerToggle.isOn)
 			PlayerInputManager.UsingController = true;
 		else

@@ -24,7 +24,6 @@ public class GameGUI : MonoBehaviour, IGameEventListener {
 	private float pusherTopY = 163;
 	private float pusherBottomY = -14;
 
-	private Health playerHealth;
 	private PlayerStatus playerStatus;
 	private AbilityManager abilities;
 
@@ -35,7 +34,6 @@ public class GameGUI : MonoBehaviour, IGameEventListener {
 	void Start () {
 		powerMeterOrigSize = powerMeter.rectTransform.sizeDelta;
 
-		playerHealth = GameApplication.WorldState.Player.GetComponent<Health>();
 		playerStatus = GameApplication.WorldState.Player.GetComponent<PlayerStatus>();
 		abilities = GameApplication.WorldState.Player.GetComponent<AbilityManager>();
 

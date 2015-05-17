@@ -34,6 +34,11 @@ public class PlayerInputManager : MonoBehaviour, IGameEventListener {
 	
 	// Update is called once per frame
 	void Update () {
+		// TODO: We certainly needs a better solution for quitting the game...
+		if(Input.GetKeyDown(KeyCode.Escape)) {
+			Application.Quit();
+		}
+
 		if(state == CurrentState.GAME) {
 			GameUpdate();
 		}
@@ -85,7 +90,6 @@ public class PlayerInputManager : MonoBehaviour, IGameEventListener {
 	private void HandleFiring() {
 		if(UsingController) {
 			float trigger = Input.GetAxisRaw("Fire1");
-			Debug.Log(trigger);
 			if(trigger == -1) { // -1 means the right trigger of the controller
 				playerWeapons.Firing = true;
 			}
