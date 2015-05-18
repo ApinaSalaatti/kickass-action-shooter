@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 // A Component that represents the health of an entity. It's responsible for receiving the TakeDamage event and then informing other components that damage has been received
 // Note that this component does nothing when the health reaches zero, other components must implement destroying the object (or whatever should happen) when they receive the OnDeath event
@@ -19,13 +20,34 @@ public class Health : MonoBehaviour {
 		set { invincible = value; }
 	}
 
+	// List of damage types this entity is immune to
+	[SerializeField]
+	private DType[] startingImmunities;
+	private List<DType> immunities;
+	public bool HasImmunity(DType damage) {
+		foreach(DType dt in immunities) {
+			if(dt == damage)
+				return true;
+		}
+		return false;
+	}
+	public void AddImmunity(DType immunity) {
+		if(!HasImmunity(immunity)) {
+			immunities.Add(immunity);
+		}
+	}
+	public void RemoveImmunity(DType immunity) {
+		immunities.Remove(immunity);
+	}
+
 	private float currentHealth;
 	public float CurrentHealth {
 		get { return currentHealth; }
 	}
 
-	// Use this for initialization
-	void Start () {
+	void Awake() {
+		immunities = new List<DType>();
+		immunities.AddRange(startingImmunities);
 		currentHealth = maxHealth;
 	}
 
@@ -40,7 +62,7 @@ public class Health : MonoBehaviour {
 		//Debug.Log(gameObject.name + " IS HURT " + di.DamageAmount);
 		float dmg = di.DamageAmount;
 
-		if(!invincible)
+		if(!invincible && !HasImmunity(di.DamageType))
 			currentHealth -= dmg;
 
 		// Send messages even when invincible

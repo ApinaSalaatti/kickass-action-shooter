@@ -74,7 +74,7 @@ public class FloorTrap : MonoBehaviour {
 				DamageInfo di = new DamageInfo();
 				di.DamageAmount = damagePerSecond;
 				di.DamagePosition = h.gameObject.transform.position;
-				di.DamageType = DamageInfo.DType.FIRE;
+				di.DamageType = DType.FIRE;
 				h.TakeDamage(di);
 			}
 		}

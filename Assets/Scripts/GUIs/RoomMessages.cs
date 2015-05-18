@@ -27,6 +27,7 @@ public class RoomMessages : MonoBehaviour, IGameEventListener {
 			StartCoroutine(ShowCountdown(5));
 		}
 		else if(e.GameEventType == GameEvent.WAVE_CLEARED) {
+			GameApplication.AudioPlayer.PlaySound("cheer");
 			StartCoroutine(ShowMessage("Wave " + (int)e.GameEventData + " cleared!", 5f));
 		}
 		else if(e.GameEventType == GameEvent.WAVE_STARTING) {
@@ -37,6 +38,11 @@ public class RoomMessages : MonoBehaviour, IGameEventListener {
 	private IEnumerator ShowCountdown(int countdownFrom) {
 		for(int i = countdownFrom; i > 0; i--) {
 			StartCoroutine(ShowMessage(i.ToString(), 1f));
+			if(i == 1)
+				GameApplication.AudioPlayer.PlaySound("bleep");
+			else
+				GameApplication.AudioPlayer.PlaySound("bloop");
+
 			yield return new WaitForSeconds(1f);
 		}
 	}

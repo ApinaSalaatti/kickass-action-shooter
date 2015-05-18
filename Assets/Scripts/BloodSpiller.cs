@@ -51,7 +51,7 @@ public class BloodSpiller : MonoBehaviour {
 	void OnDeath(DamageInfo di) {
 		Instantiate(bloodExplosion, transform.position, Quaternion.identity);
 
-		if(di.DamageType == DamageInfo.DType.EXPLOSION) {
+		if(di.DamageType == DType.EXPLOSION) {
 			ThrowBodyParts(di);
 		}
 		else {

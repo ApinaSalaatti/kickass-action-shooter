@@ -55,6 +55,7 @@ public class ExplosiveObject : MonoBehaviour {
 			di.DamageAmount = damage;
 			di.DamagePosition = col.gameObject.transform.position;
 			di.DamageDirection = dir;
+			di.DamageType = DType.EXPLOSION;
 			col.gameObject.SendMessage("TakeDamage", di, SendMessageOptions.DontRequireReceiver);
 
 			// If the object can be moved, apply a force to it to simulate a shockwave

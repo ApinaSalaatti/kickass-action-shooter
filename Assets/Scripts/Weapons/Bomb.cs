@@ -54,7 +54,7 @@ public class Bomb : MonoBehaviour {
 			di.DamageAmount = damage;
 			di.DamagePosition = col.gameObject.transform.position;
 			di.DamageDirection = dir;
-			di.DamageType = DamageInfo.DType.EXPLOSION;
+			di.DamageType = DType.EXPLOSION;
 			col.gameObject.SendMessage("TakeDamage", di, SendMessageOptions.DontRequireReceiver);
 			
 			// If the object can be moved, apply a force to it to simulate a shockwave
@@ -67,7 +67,7 @@ public class Bomb : MonoBehaviour {
 		// Send a message about blowing up to self so other components can do stuff
 		di = new DamageInfo();
 		di.DamagePosition = transform.position;
-		di.DamageType = DamageInfo.DType.EXPLOSION;
+		di.DamageType = DType.EXPLOSION;
 		SendMessage("OnDeath", di, SendMessageOptions.DontRequireReceiver);
 		Destroy(gameObject);
 	}
