@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ProjectileShooter : MonoBehaviour {
+public class ProjectileShooter : Hazard {
 	[SerializeField]
 	private GameObject projectilePrefab;
 	[SerializeField]
@@ -19,6 +19,10 @@ public class ProjectileShooter : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if(!HazardActive) {
+			return; 
+		}
+
 		timer += Time.deltaTime;
 		if(timer >= projectileInterval) {
 			timer = 0f;

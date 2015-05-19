@@ -39,9 +39,9 @@ public class RoomMessages : MonoBehaviour, IGameEventListener {
 		for(int i = countdownFrom; i > 0; i--) {
 			StartCoroutine(ShowMessage(i.ToString(), 1f));
 			if(i == 1)
-				GameApplication.AudioPlayer.PlaySound("bleep");
+				GameApplication.AudioPlayer.PlaySound("explosion");
 			else
-				GameApplication.AudioPlayer.PlaySound("bloop");
+				GameApplication.AudioPlayer.PlaySound("pistolFire");
 
 			yield return new WaitForSeconds(1f);
 		}

@@ -54,6 +54,7 @@ public class EndlessRoom : MonoBehaviour {
 		Debug.Log("starting wave " + currentWave);
 		GameApplication.EventManager.QueueEvent(GameEvent.WAVE_STARTING, currentWave);
 		yield return new WaitForSeconds(5f); // Wait for a bit so a countdown can be displayed
+		endlessModeManager.ActivateHazardsForWave(currentWave); // Start some traps maybe
 		StartEnemySpawners();
 		waveStarted = true;
 		GameApplication.AudioPlayer.PlaySound("elevatorDing"); // The wave starts and the enemies start pouring out of the elevators and an OMINOUS ding is played

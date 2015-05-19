@@ -32,7 +32,7 @@ public class PickupCreator : MonoBehaviour {
 		GameObject p = Instantiate(healthPickupPrefab) as GameObject;
 
 		// Generate the proper amount of restored health based on the level
-		int h = Random.Range(2, 8) * lvl;
+		float h = Random.Range(0.1f, 0.2f) * lvl;
 		p.GetComponent<HealthPickup>().AmountHealed = h;
 
 		return p;
@@ -41,7 +41,7 @@ public class PickupCreator : MonoBehaviour {
 		GameObject p = Instantiate(powerPickupPrefab) as GameObject;
 
 		// Generate the proper amount of restored power based on the level
-		int pow = Random.Range(1, 4) * lvl;
+		float pow = Random.Range(0.5f, 1f) * lvl;
 		p.GetComponent<PowerPickup>().AmountRestored = pow;
 
 		return p;

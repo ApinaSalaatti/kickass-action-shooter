@@ -43,7 +43,8 @@ public class ExplodingState : State {
 	private IEnumerator StartExploding() {
 		exploding = true;
 
-		// TODO: Start some cool animation here
+		ParentAI.GetComponent<ParticleSystem>().Play();
+		ParentAI.GetComponent<Animator>().SetTrigger("Explode");
 
 		yield return new WaitForSeconds(fuseTime);
 

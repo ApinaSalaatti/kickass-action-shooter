@@ -95,4 +95,8 @@ public class GameOverScreen : MonoBehaviour {
 		ShowStatistics();
 		ShowTopTen();
 	}
+
+	public void QuitToMainMenu() {
+		Application.LoadLevel(0);
+	}
 }

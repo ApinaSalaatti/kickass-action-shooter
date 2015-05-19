@@ -20,6 +20,7 @@ public class SearchingState : State {
 		}
 
 		ParentAI.EntitySteering.PursuitTarget = ParentAI.Perception.Player.transform;
+		ParentAI.EntitySteering.PursuitOffset = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0f); // Set a bit of offset to the pursuit
 
 		if(ParentAI.Perception.CanSeePlayer) {
 			if(ParentAI.Perception.DistanceFromPlayer < ParentAI.AttackDistance) {

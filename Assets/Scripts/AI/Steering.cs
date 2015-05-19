@@ -10,6 +10,10 @@ public class Steering : MonoBehaviour {
 	public Transform PursuitTarget {
 		get; set;
 	}
+	// Pursuit offset is used to create a bit of randomness to the enemies' approach so they don't always just run in a line
+	public Vector3 PursuitOffset {
+		get; set;
+	}
 	
 	public bool ObjectAvoidanceOn {
 		get; set;
@@ -30,6 +34,7 @@ public class Steering : MonoBehaviour {
 		ObjectAvoidanceOn = true;
 		DistanceOfObjectAvoidanceCheck = 3f;
 		calculatedDirection = new Vector2();
+		PursuitOffset = new Vector3();
 	}
 	
 	// Update is called once per frame
@@ -59,9 +64,8 @@ public class Steering : MonoBehaviour {
 		}
 		
 		// TODO: Should calculate some cool stuff based on the speed of the target!
-		//return new Vector2(ParentAI.Perception.DirectionToPlayer.x, ParentAI.Perception.DirectionToPlayer.y);
 
-		Vector3 toTarget = PursuitTarget.position - transform.position;
+		Vector3 toTarget = (PursuitTarget.position + PursuitOffset) - transform.position;
 		return new Vector2(toTarget.x, toTarget.y).normalized;
 	}
 	

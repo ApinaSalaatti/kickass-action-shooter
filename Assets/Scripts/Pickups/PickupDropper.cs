@@ -2,6 +2,7 @@
 using System.Collections;
 
 // A PickupDropper consists mainly of an array of these, forming a sort of loot table where a random entry will be picked
+// TODO: Should probably make a generic loot table system to be used also in the enemy spawn creator
 [System.Serializable]
 public class PickupDropperLootTableEntry {
 	public Pickup.PickupType pType;

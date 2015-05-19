@@ -34,9 +34,9 @@ public class PlayerInputManager : MonoBehaviour, IGameEventListener {
 	
 	// Update is called once per frame
 	void Update () {
-		// TODO: We certainly needs a better solution for quitting the game...
+		// TODO: We certainly need a better solution for quitting the game...
 		if(Input.GetKeyDown(KeyCode.Escape)) {
-			Application.Quit();
+			Application.LoadLevel(0);
 		}
 
 		if(state == CurrentState.GAME) {

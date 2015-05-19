@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class FloorTrap : MonoBehaviour {
+public class FloorTrap : Hazard {
 	[SerializeField]
 	private float activationInterval = 5f;
 	public float ActivationInterval {
@@ -40,6 +40,10 @@ public class FloorTrap : MonoBehaviour {
 	}
 
 	void Update () {
+		if(!HazardActive) {
+			return;
+		}
+
 		timer += Time.deltaTime;
 		if(timer >= activationInterval) {
 			timer = 0f;
@@ -47,11 +51,11 @@ public class FloorTrap : MonoBehaviour {
 		}
 	}
 
+	// This will be called by the Animator
 	public void Activate() {
 		if(!active) StartCoroutine(BeActive());
 	}
-
-	// This will be called by the Animator
+	
 	private IEnumerator BeActive() {
 		active = true;
 		InvokeRepeating("ApplyEffect", 0f, 1f);
