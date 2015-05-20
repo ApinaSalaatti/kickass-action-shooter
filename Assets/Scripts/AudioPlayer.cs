@@ -34,6 +34,8 @@ public class AudioPlayer : MonoBehaviour {
 	private AudioLookupTableEntry[] soundClips;
 	[SerializeField]
 	private AudioLookupTableEntry[] musicTracks;
+	[SerializeField]
+	private MusicTrack[] dynamicMusicTracks;
 
 	// Use this for initialization
 	void Awake() {
@@ -55,10 +57,11 @@ public class AudioPlayer : MonoBehaviour {
 
 	private AudioClip FindMusic(string n) {
 		foreach(AudioLookupTableEntry a in musicTracks) {
-			if(a.name == n)
-				return a.GiveRandom(); // Always select a random clip (if there's only one clip with this name, it is always chosen you see :)
+			if(a.name == n) {
+				return a.GiveRandom(); // Always choose a random clip (if there's only one, that's the one chosen!)
+			}
 		}
-
+		
 		return null;
 	}
 	private AudioClip FindSound(string n) {
@@ -81,6 +84,17 @@ public class AudioPlayer : MonoBehaviour {
 				return a;
 			}
 		}
+		return null;
+	}
+
+	// Dynamic music tracks are not handled here, they are just passed along
+	public MusicTrack GetDynamicMusic(string name) {
+		foreach(MusicTrack m in dynamicMusicTracks) {
+			if(m.TrackName == name) {
+				return m;
+			}
+		}
+		Debug.Log("Dynamic music track " + name + " not found!");
 		return null;
 	}
 

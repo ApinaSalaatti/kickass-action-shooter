@@ -42,6 +42,9 @@ public class EndlessRoom : MonoBehaviour {
 	}
 
 	private IEnumerator EndWave() {
+		MusicTrack m = GameApplication.AudioPlayer.GetDynamicMusic("action");
+		m.MuteInstrument("main", 2f);
+
 		Debug.Log("ending wave " + currentWave);
 		waveStarted = false;
 		GameApplication.EventManager.QueueEvent(GameEvent.WAVE_CLEARED, currentWave);
@@ -54,6 +57,10 @@ public class EndlessRoom : MonoBehaviour {
 		Debug.Log("starting wave " + currentWave);
 		GameApplication.EventManager.QueueEvent(GameEvent.WAVE_STARTING, currentWave);
 		yield return new WaitForSeconds(5f); // Wait for a bit so a countdown can be displayed
+
+		MusicTrack m = GameApplication.AudioPlayer.GetDynamicMusic("action");
+		m.UnmuteInstrument("main", 2f);
+
 		endlessModeManager.ActivateHazardsForWave(currentWave); // Start some traps maybe
 		StartEnemySpawners();
 		waveStarted = true;

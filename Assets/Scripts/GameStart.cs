@@ -6,7 +6,10 @@ using System.Collections;
 public class GameStart : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
-		GameApplication.AudioPlayer.PlayMusic("action");
+		//GameApplication.AudioPlayer.PlayMusic("action");
+		MusicTrack m = GameApplication.AudioPlayer.GetDynamicMusic("action");
+		m.Play();
+		m.MuteInstrument("main");
 	}
 	
 	// Update is called once per frame
