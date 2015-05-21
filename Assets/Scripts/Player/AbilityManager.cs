@@ -4,6 +4,7 @@ using System.Collections.Generic;
 public class AbilityManager : MonoBehaviour, IGameEventListener {
 	public Ability bulletStopAbility;
 	public Ability dashAbility;
+	public Ability explosionAbility;
 
 	[SerializeField]
 	private float killPowerValue = 0.3f;
@@ -60,6 +61,12 @@ public class AbilityManager : MonoBehaviour, IGameEventListener {
 		if(power > 0f && power >= dashAbility.ActivationCost) {
 			power -= dashAbility.ActivationCost;
 			dashAbility.Activate();
+		}
+	}
+	public void ActivateExplosion() {
+		if(power > 0f && power >= explosionAbility.ActivationCost) {
+			power -= explosionAbility.ActivationCost;
+			explosionAbility.Activate();
 		}
 	}
 

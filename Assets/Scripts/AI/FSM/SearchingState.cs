@@ -11,6 +11,8 @@ public class SearchingState : State {
 	public override void OnEnter ()
 	{
 		ParentAI.LookAtPlayer = true;
+		ParentAI.EntitySteering.PursuitTarget = ParentAI.Perception.Player.transform;
+		//ParentAI.EntitySteering.PursuitOffset = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0f); // Set a bit of offset to the pursuit
 	}
 
 	public override AIStateType UpdateState ()
@@ -18,9 +20,6 @@ public class SearchingState : State {
 		if(ParentAI.Perception.PlayerDead) {
 			return AIStateType.WANDERING;
 		}
-
-		ParentAI.EntitySteering.PursuitTarget = ParentAI.Perception.Player.transform;
-		ParentAI.EntitySteering.PursuitOffset = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0f); // Set a bit of offset to the pursuit
 
 		if(ParentAI.Perception.CanSeePlayer) {
 			if(ParentAI.Perception.DistanceFromPlayer < ParentAI.AttackDistance) {

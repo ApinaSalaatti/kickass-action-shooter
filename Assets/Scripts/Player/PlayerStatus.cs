@@ -67,11 +67,28 @@ public class PlayerStatus : MonoBehaviour {
 		MultiplierUpdate();
 	}
 
-	void OnDamage() {
-		CameraEffects.StartShake(0.3f, 0.1f);
+	// After being hit, the player is invincible for a short while
+	private IEnumerator BeIncincible() {
+		GetComponent<Animator>().SetBool("Invincible", true);
+		GetComponent<Health>().Invincible = true;
+		GetComponent<BoxCollider2D>().isTrigger = true; // Can also walk through enemies
+		yield return new WaitForSeconds(3f);
+		GetComponent<Animator>().SetBool("Invincible", false);
+		GetComponent<Health>().Invincible = false;
+		GetComponent<BoxCollider2D>().isTrigger = false;
+	}
+
+	void OnDamage(DamageInfo di) {
+		//Debug.Log("PLAYER TAKES DAMAGE!");
+		CameraEffects.StartShake(0.3f, 0.08f);
 		GameApplication.AudioPlayer.PlaySound("playerHurt");
 		ResetMultiplier();
 		GameApplication.EventManager.QueueEvent(GameEvent.PLAYER_HIT, gameObject);
+		StartCoroutine(BeIncincible());
+	}
+
+	void OnInvincibilityHit(DamageInfo di) {
+		GameApplication.AudioPlayer.PlaySound("clang");
 	}
 
 	void OnDeath() {

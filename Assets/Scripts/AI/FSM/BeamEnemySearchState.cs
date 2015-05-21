@@ -25,7 +25,7 @@ public class BeamEnemySearchState : State {
 	{
 		ParentAI.SteeringOn = false;
 		SelectRandomDir();
-		timeUntilFiring = Random.Range(2f, 5f);
+		timeUntilFiring = Random.Range(5f, 8f);
 		ParentAI.EntitySteering.ObjectAvoidanceOn = false;
 		ParentAI.EntitySteering.PursuitOn = false;
 	}

@@ -13,6 +13,8 @@ public class GameOverScreen : MonoBehaviour {
 	private Text topTenText;
 	[SerializeField]
 	private Text playerNameText;
+	[SerializeField]
+	private GameObject bloodX;
 
 	private bool screenOpen = false;
 
@@ -67,10 +69,20 @@ public class GameOverScreen : MonoBehaviour {
 		if(GameApplication.Statistics.EnemiesKilled >= 25000) {
 			topicText.text = "You became a MASTER OF PUNISHMENT!\n(shame you died in the process)";
 		}
+		else {
+			StartCoroutine(ShowBloodX());
+		}
 
 		statsText.text = "";
 		statsText.text += "Enemies killed: " + GameApplication.Statistics.EnemiesKilled + "\n";
 		statsText.text += "Bullets fired: " + GameApplication.Statistics.BulletsFiredByPlayer + "\n";
+	}
+
+	private IEnumerator ShowBloodX() {
+		yield return new WaitForSeconds(2f);
+		bloodX.SetActive(true);
+		yield return new WaitForSeconds(0.3f);
+		GameApplication.AudioPlayer.PlaySound("explosion");
 	}
 
 	private void ShowTopTen() {

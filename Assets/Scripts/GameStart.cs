@@ -9,7 +9,7 @@ public class GameStart : MonoBehaviour {
 		//GameApplication.AudioPlayer.PlayMusic("action");
 		MusicTrack m = GameApplication.AudioPlayer.GetDynamicMusic("action");
 		m.Play();
-		m.MuteInstrument("main");
+		//m.MuteInstrument("main");
 	}
 	
 	// Update is called once per frame

@@ -66,6 +66,7 @@ public class PlayerInputManager : MonoBehaviour, IGameEventListener {
 		
 		// Moving
 		Vector2 movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+		//Debug.Log(movement);
 		playerMover.Velocity = movement.normalized * playerMover.MaxSpeed; // Player always runs at FULL SPEED
 
 		if(UsingController) {
@@ -77,6 +78,10 @@ public class PlayerInputManager : MonoBehaviour, IGameEventListener {
 
 		// Firing
 		HandleFiring();
+
+		if(Input.GetButtonDown("ChangeWeapon")) {
+			playerWeapons.ChangeWeapon();
+		}
 		
 		// Abilities
 		if(Input.GetButtonDown("BulletStop")) {
@@ -84,6 +89,9 @@ public class PlayerInputManager : MonoBehaviour, IGameEventListener {
 		}
 		if(Input.GetButtonDown("Dash")) {
 			playerAbilities.ActivateDash();
+		}
+		if(Input.GetButtonDown("Explosion")) {
+			playerAbilities.ActivateExplosion();
 		}
 	}
 
@@ -121,11 +129,12 @@ public class PlayerInputManager : MonoBehaviour, IGameEventListener {
 	}
 	private void AimAndTurnController() {
 		float deltaX = Input.GetAxisRaw("ControllerRightX");
-		float deltaY = -Input.GetAxisRaw("ControllerRightY"); // Controller Y axis seems to be inverted
-		//Debug.Log(deltaX + "," + deltaY);
+		float deltaY = Input.GetAxisRaw("ControllerRightY");
+		Vector2 inputVector = new Vector2(deltaX, deltaY);
+		//Debug.Log(inputVector);
 
-		// Change only when the right stick is actually turned
-		if(deltaX > 0.01f || deltaY > 0.01f) {
+		// Change only when the right stick is actually turned a bit
+		if(inputVector.magnitude > 0.25f) {
 			Vector2 aim = new Vector2(deltaX, deltaY);
 			aim = aim.normalized;
 			playerWeapons.AimTowards = aim;

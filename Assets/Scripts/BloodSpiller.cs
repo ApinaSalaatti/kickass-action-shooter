@@ -29,10 +29,13 @@ public class BloodSpiller : MonoBehaviour {
 	}
 
 	public void SpillBlood(Vector2 dir) {
-		// Spawn the particle effect in the direction of the damage
 		float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90f; // It seems the particles need to be turned an additional 90 degrees for some reason
 		Quaternion q = Quaternion.Euler(0f, 0f, angle);
-		Instantiate(bloodCloudPrefab, transform.position, q);
+
+		// Spawn the particle effect (if available) in the direction of the damage
+		if(bloodCloudPrefab != null) {
+			Instantiate(bloodCloudPrefab, transform.position, q);
+		}
 
 		// Spawn a random number of blood pools roughly into the direction of the damage
 		int r = Random.Range(3, 10);

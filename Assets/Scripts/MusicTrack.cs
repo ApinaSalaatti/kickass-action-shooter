@@ -9,7 +9,8 @@ public class InstrumentLine {
 	public AudioSource source;
 }
 
-[System.Serializable]
+// A very very simple "dynamic" music system, i.e. a track of music where individual instruments can be muted
+// TODO: predefined points of entry/exit so the instruments won't disappear in the middle of a melody etc
 public class MusicTrack : MonoBehaviour {
 	[SerializeField]
 	private string trackName;

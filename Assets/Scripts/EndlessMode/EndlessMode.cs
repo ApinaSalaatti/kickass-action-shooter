@@ -9,7 +9,7 @@ public class WaveHazards {
 }
 
 // This enum contains all the enemy types that can be randomly spawned
-public enum EnemyType { PISTOL, EXPLODING, ROBOT, ROCKET }
+public enum EnemyType { MELEE, PISTOL, EXPLODING, ROBOT, ROCKET }
 
 // A helper class used when randomly creating enemy waves
 public class PossibleEnemySpawnEntry {
@@ -35,6 +35,8 @@ public class EndlessMode : MonoBehaviour {
 	[SerializeField]
 	private WaveHazards[] hazardsForWaves;
 
+	[SerializeField]
+	private GameObject meleeEnemyPrefab;
 	[SerializeField]
 	private GameObject pistolEnemyPrefab;
 	[SerializeField]
@@ -71,7 +73,7 @@ public class EndlessMode : MonoBehaviour {
 
 	// A very lousy system for randomly generating waves of enemies that get harder and harder
 	public SpawnEvent[] CreateSpawnsForWave(int wave) {
-		int spawnEvents = wave * 2;
+		int spawnEvents = Mathf.FloorToInt(wave * 1.4f);
 
 		SpawnEvent[] queue = new SpawnEvent[spawnEvents];
 		List<PossibleEnemySpawnEntry> possibleSpawns = CreatePossibleSpawns(wave);
@@ -89,6 +91,8 @@ public class EndlessMode : MonoBehaviour {
 
 	private GameObject GivePrefab(EnemyType type) {
 		switch(type) {
+		case EnemyType.MELEE:
+			return meleeEnemyPrefab;
 		case EnemyType.PISTOL:
 			return pistolEnemyPrefab;
 		case EnemyType.EXPLODING:
@@ -98,7 +102,7 @@ public class EndlessMode : MonoBehaviour {
 		case EnemyType.ROCKET:
 			return rocketEnemyPrefab;
 		default:
-			return pistolEnemyPrefab; // Default to the pistol enemy
+			return meleeEnemyPrefab; // Default to the melee enemy
 		}
 	}
 
@@ -121,25 +125,31 @@ public class EndlessMode : MonoBehaviour {
 	private List<PossibleEnemySpawnEntry> CreatePossibleSpawns(int wave) {
 		List<PossibleEnemySpawnEntry> spawns = new List<PossibleEnemySpawnEntry>();
 
-		// Basic pistol enemies will increase in amount every wave if spawned, but their overall chance of spawn will decrease
-		spawns.Add(new PossibleEnemySpawnEntry(EnemyType.PISTOL, wave * 2, 100));
+		// Basic melee enemies will increase in amount every wave if spawned, but their overall chance of spawn will decrease
+		spawns.Add(new PossibleEnemySpawnEntry(EnemyType.MELEE, Mathf.FloorToInt(wave * 1.6f), 100));
 
 		if(wave > 1) {
 			// Exploding enemies come into play!
-			int amount = Mathf.FloorToInt(wave * 1.5f) + Random.Range(0, 3);
+			int amount = wave + Random.Range(0, 2);
 			int weight = 100 + wave * 10; // Exploding enemies chance of spawn will increase
 			spawns.Add(new PossibleEnemySpawnEntry(EnemyType.EXPLODING, amount, weight));
 		}
 		if(wave > 3) {
 			// Roboooooots!
-			int amount = wave + Random.Range(0, 3);
-			int weight = 100 + wave * wave * 10; // Chance of spawn increases rapidly
+			int amount = Random.Range(1, 4);
+			int weight = 100 + wave * 10; // Chance of spawn increases
+			spawns.Add(new PossibleEnemySpawnEntry(EnemyType.ROBOT, amount, weight));
+		}
+		if(wave > 4) {
+			// Pistol guys!
+			int amount = Random.Range(1, 4);
+			int weight = 80; // A smallish chance
 			spawns.Add(new PossibleEnemySpawnEntry(EnemyType.ROBOT, amount, weight));
 		}
 		if(wave > 5) {
 			// Oh snap, rocket launchers!
-			int amount = wave/2;
-			int weight = 50 + wave * wave * 10; // Starts a bit low but increases fast
+			int amount = 1;
+			int weight = 50 + wave * wave * 5; // Starts a bit low but increases pretty fast
 			spawns.Add(new PossibleEnemySpawnEntry(EnemyType.ROCKET, amount, weight));
 		}
 

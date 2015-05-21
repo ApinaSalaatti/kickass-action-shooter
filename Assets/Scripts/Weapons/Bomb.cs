@@ -12,6 +12,8 @@ public class Bomb : MonoBehaviour {
 	private GameObject particleEffect;
 	[SerializeField]
 	private GameObject craterPrefab;
+	[SerializeField]
+	private string[] layersToAffect = new string[] {"Player", "Enemy"};
 
 	private bool exploded = false;
 
@@ -38,14 +40,15 @@ public class Bomb : MonoBehaviour {
 		GameApplication.EventManager.QueueEvent(GameEvent.EFFECT_OBJECT_CREATED, c);
 
 		// Make the screen SHAKE
-		CameraEffects.StartShake(0.5f, 0.1f);
+		CameraEffects.StartShake(0.5f, 0.06f);
 
 		// Play sound FX
 		GameApplication.AudioPlayer.PlaySound("explosion");
 
 		DamageInfo di = new DamageInfo();
+		LayerMask layerMask = LayerMask.GetMask(layersToAffect);
 		// Find who we hit and HURT them
-		Collider2D[] cols = Physics2D.OverlapCircleAll(transform.position, explosionRange);
+		Collider2D[] cols = Physics2D.OverlapCircleAll(transform.position, explosionRange, layerMask);
 		foreach(Collider2D col in cols) {
 			if(col.gameObject == gameObject) continue; // We don't need to hurt ourself
 

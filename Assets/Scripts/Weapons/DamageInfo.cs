@@ -2,7 +2,7 @@
 using System.Collections;
 
 // Different types of damage can be inflicted
-public enum DType { BULLET, EXPLOSION, FIRE }
+public enum DType { BULLET, MELEE, EXPLOSION, FIRE }
 
 // A helper class that encapsulates information about a damage event
 public class DamageInfo {

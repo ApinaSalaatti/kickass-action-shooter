@@ -9,7 +9,7 @@ public abstract class Pickup : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D col) {
 		if(GetPickedUp(col.gameObject)) {
-			GameApplication.AudioPlayer.PlaySound(soundFX);
+			GameApplication.AudioPlayer.PlaySound(soundFX, 0.8f, 0, true); // Only one pickup sound playing at a time
 			Destroy(gameObject);
 		}
 	}

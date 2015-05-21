@@ -19,6 +19,7 @@ public class Weapon : MonoBehaviour {
 
 	[SerializeField]
 	private string soundFX;
+	public string SoundFX { get { return soundFX; } }
 	
 	// These will always be set from outside, i.e. by AI or player input
 	public bool Firing {
@@ -52,7 +53,7 @@ public class Weapon : MonoBehaviour {
 		}
 	}
 
-	private void Fire() {
+	protected virtual void Fire() {
 		// Calculate position for the bullet
 		Vector3 bOffset = new Vector3(AimTowards.x, AimTowards.y, 0f) * bulletSpawnDistance;
 		GameObject b = Instantiate(bulletPrefab, transform.position + bOffset, Quaternion.identity) as GameObject;
@@ -88,6 +89,6 @@ public class Weapon : MonoBehaviour {
 		// Display muzzle flash
 		if(muzzleFlash != null) muzzleFlash.Show();
 		// Play sound
-		GameApplication.AudioPlayer.PlaySound(soundFX);
+		GameApplication.AudioPlayer.PlaySound(soundFX, 0.5f);
 	}
 }

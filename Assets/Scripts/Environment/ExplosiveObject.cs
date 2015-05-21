@@ -40,7 +40,7 @@ public class ExplosiveObject : MonoBehaviour {
 		GameApplication.EventManager.QueueEvent(GameEvent.EFFECT_OBJECT_CREATED, c);
 
 		// Make the screen SHAKE
-		CameraEffects.StartShake(0.5f, 0.1f);
+		CameraEffects.StartShake(0.5f, 0.06f);
 
 		// Play sound
 		GameApplication.AudioPlayer.PlaySound("explosion");

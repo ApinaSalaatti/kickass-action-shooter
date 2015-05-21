@@ -62,13 +62,16 @@ public class Health : MonoBehaviour {
 		//Debug.Log(gameObject.name + " IS HURT " + di.DamageAmount);
 		float dmg = di.DamageAmount;
 
-		if(!invincible && !HasImmunity(di.DamageType))
+		if(!invincible && !HasImmunity(di.DamageType)) {
 			currentHealth -= dmg;
 
-		// Send messages even when invincible
-		SendMessage("OnDamage", di, SendMessageOptions.DontRequireReceiver);
-		if(currentHealth <= 0) {
-			SendMessage("OnDeath", di, SendMessageOptions.DontRequireReceiver);
+			SendMessage("OnDamage", di, SendMessageOptions.DontRequireReceiver);
+			if(currentHealth <= 0) {
+				SendMessage("OnDeath", di, SendMessageOptions.DontRequireReceiver);
+			}
+		}
+		else {
+			SendMessage("OnInvincibilityHit", di, SendMessageOptions.DontRequireReceiver);
 		}
 	}
 }

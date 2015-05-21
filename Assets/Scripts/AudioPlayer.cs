@@ -16,7 +16,7 @@ public class AudioLookupTableEntry {
 
 // Helpful methods to play sounds and music. Has global access through the GameApplication class
 // Only a certain number of sounds can be playing at the same time
-// TODO: add a priority system so more important sounds will override currently playing less important sounds
+// TODO: add a priority system so more important sounds will override currently playing less important sounds?
 public class AudioPlayer : MonoBehaviour {
 	[SerializeField]
 	private GameObject audioSourcePrefab;
@@ -86,6 +86,24 @@ public class AudioPlayer : MonoBehaviour {
 		}
 		return null;
 	}
+	private AudioSource GetFreeSoundSource(AudioClip overridableSound) {
+		if(overridableSound == null) {
+			return GetFreeSoundSource();
+		}
+
+		AudioSource empty = null;
+		// Try to find a source with a matching AudioClip. If none is found, return an empty source (if any)
+		foreach(AudioSource a in soundSources) {
+			if(a.isPlaying && a.clip == overridableSound) {
+				return a;
+			}
+			if(!a.isPlaying) {
+				//Debug.Log("Sound source found!");
+				empty = a;
+			}
+		}
+		return empty;
+	}
 
 	// Dynamic music tracks are not handled here, they are just passed along
 	public MusicTrack GetDynamicMusic(string name) {
@@ -106,15 +124,14 @@ public class AudioPlayer : MonoBehaviour {
 			musicSource.Play();
 		}
 	}
-	public void PlaySound(string name, float volume = 0.8f, ulong delay = 0) {
-		AudioSource a = GetFreeSoundSource();
-		if(a != null) {
-			AudioClip ac = FindSound(name);
-			if(ac != null) {
-				a.clip = ac;
-				a.volume = volume;
-				a.Play(delay);
-			}
+	// If the parameter unique is true, the played sound will override a playing sound of the same name (if any)
+	public void PlaySound(string name, float volume = 0.8f, ulong delay = 0, bool unique = false) {
+		AudioClip ac = FindSound(name);
+		AudioSource a = unique ? GetFreeSoundSource(ac) : GetFreeSoundSource(); // If the sound must be unique, try to find and override it
+		if(a != null && ac != null) {
+			a.clip = ac;
+			a.volume = volume;
+			a.Play(delay);
 		}
 	}
 }

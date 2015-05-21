@@ -43,7 +43,7 @@ public class EndlessRoom : MonoBehaviour {
 
 	private IEnumerator EndWave() {
 		MusicTrack m = GameApplication.AudioPlayer.GetDynamicMusic("action");
-		m.MuteInstrument("main", 2f);
+		//m.MuteInstrument("main", 2f);
 
 		Debug.Log("ending wave " + currentWave);
 		waveStarted = false;
@@ -59,7 +59,7 @@ public class EndlessRoom : MonoBehaviour {
 		yield return new WaitForSeconds(5f); // Wait for a bit so a countdown can be displayed
 
 		MusicTrack m = GameApplication.AudioPlayer.GetDynamicMusic("action");
-		m.UnmuteInstrument("main", 2f);
+		//m.UnmuteInstrument("main", 2f);
 
 		endlessModeManager.ActivateHazardsForWave(currentWave); // Start some traps maybe
 		StartEnemySpawners();
